@@ -46,6 +46,7 @@ List Fitur:
 | 1906306092| Hanifa Ariana | 3,5 |
 ---
 **Kontrak Tahap 3 Tugas Akhir**
+---
 Karena Endriyani dan Hanifa mengerjakan 2 fitur pada tahap 2, mereka tidak mengerjakan tahap 3
 
 | NPM | Nama Lengkap | Fitur yang akan diselesaikan |
