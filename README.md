@@ -4,7 +4,7 @@
 * **Monalisa Valencia** - *1706103543* - *A*
 * **Garry Hanuga** - *1906399184* - *A*
 * **Endriyani Rahayu** - *190298866* - *A*
-* **Hanifah Ariana** - *190xxx* - *A*
+* **Hanifa Ariana** - *1906306092* - *A*
 
 ---
 **Kontrak Tahap 1 Tugas Akhir**
