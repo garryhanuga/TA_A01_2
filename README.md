@@ -54,6 +54,6 @@ Karena Endriyani dan Hanifa mengerjakan 2 fitur pada tahap 2, mereka tidak menge
 | 1906353706| Nur Hafsari Setyorini | 10 |
 | 1706103543| Monalisa Valencia | 4 |
 | 1906399184| Garry Hanuga | 8 |
-| 190298866| Endriyani Rahayu | - |
-| 1906306092| Hanifa Ariana | - |
+| 190298866| Endriyani Rahayu | QC1 |
+| 1906306092| Hanifa Ariana | QC2 |
 ---
