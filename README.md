@@ -29,31 +29,29 @@ List Fitur:
 
 | NPM | Nama Lengkap | Fitur yang akan diselesaikan |
 | ----------| --- | ---------- |
-| 1906353706| Nur Hafsari Setyorini | 6 |
+| 1906353706| Nur Hafsari Setyorini | 5 |
 | 1706103543| Monalisa Valencia | 1 |
-| 1906399184| Garry Hanuga | 11 |
-| 190298866| Endriyani Rahayu | 14 |
-| 1906306092| Hanifa Ariana | 15 |
+| 1906399184| Garry Hanuga | 13 |
+| 190298866| Endriyani Rahayu | 7 |
+| 1906306092| Hanifa Ariana | 14 |
 ---
 **Kontrak Tahap 2 Tugas Akhir**
 
 | NPM | Nama Lengkap | Fitur yang akan diselesaikan |
 | ----------| --- | ---------- |
-| 1906353706| Nur Hafsari Setyorini | 2 |
-| 1706103543| Monalisa Valencia | 12 |
-| 1906399184| Garry Hanuga | 13 |
-| 190298866| Endriyani Rahayu | 7,9 |
-| 1906306092| Hanifa Ariana | 3,5 |
+| 1906353706| Nur Hafsari Setyorini | 9 |
+| 1706103543| Monalisa Valencia | 6 |
+| 1906399184| Garry Hanuga | 8 |
+| 190298866| Endriyani Rahayu | 3 |
+| 1906306092| Hanifa Ariana | 12 |
 ---
 **Kontrak Tahap 3 Tugas Akhir**
----
-Karena Endriyani dan Hanifa mengerjakan 2 fitur pada tahap 2, mereka tidak mengerjakan tahap 3
 
 | NPM | Nama Lengkap | Fitur yang akan diselesaikan |
 | ----------| --- | ---------- |
-| 1906353706| Nur Hafsari Setyorini | 10 |
+| 1906353706| Nur Hafsari Setyorini | 11 |
 | 1706103543| Monalisa Valencia | 4 |
-| 1906399184| Garry Hanuga | 8 |
-| 190298866| Endriyani Rahayu | QC1 |
-| 1906306092| Hanifa Ariana | QC2 |
+| 1906399184| Garry Hanuga | 2 |
+| 190298866| Endriyani Rahayu | 15 |
+| 1906306092| Hanifa Ariana | 10 |
 ---
