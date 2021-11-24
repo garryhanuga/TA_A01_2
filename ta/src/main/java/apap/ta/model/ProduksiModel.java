@@ -25,14 +25,12 @@ public class ProduksiModel implements Serializable {
     @Id
     @Column(name="id_produksi")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id_produksi;
+    private Long idProduksi;
 
-    @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String idItem;
 
-    @Id
     @Column(name = "id_kategori")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idKategori;
@@ -57,10 +55,11 @@ public class ProduksiModel implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private MesinModel mesin;
 
-    // //relasi dengan request update item
-    // @OneToOne(cascade = CascadeType.ALL)
-    // @JoinColumn(name="id_request_update_item", referencedColumnName="id_request_update_item")
-    // private RequestUpdateItemModel request_update_item; <-- ini apa
+    //relasi dengan request update item
+//     @OneToOne(cascade = CascadeType.ALL)
+//     @JoinColumn(name="id_request_update_item", referencedColumnName="id_request_update_item")
+//     private RequestUpdateItemModel RequestUpdateItem;
+
 
 
 }
