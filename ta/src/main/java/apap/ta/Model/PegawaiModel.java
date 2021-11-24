@@ -1,4 +1,4 @@
-package apap.ta.Model;
+package apap.ta.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

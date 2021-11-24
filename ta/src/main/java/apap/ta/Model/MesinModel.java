@@ -1,4 +1,4 @@
-package apap.ta.Model;
+package apap.ta.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
