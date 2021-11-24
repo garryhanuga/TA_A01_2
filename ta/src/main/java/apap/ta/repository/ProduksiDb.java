@@ -1,5 +1,6 @@
 package apap.ta.repository;
 
+import apap.ta.model.ProduksiModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
