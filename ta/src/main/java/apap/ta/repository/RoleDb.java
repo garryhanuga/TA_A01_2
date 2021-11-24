@@ -1,6 +1,6 @@
-package apap.ta.Repository;
+package apap.ta.repository;
 
-import apap.ta.Model.PegawaiModel;
+import apap.ta.model.PegawaiModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
