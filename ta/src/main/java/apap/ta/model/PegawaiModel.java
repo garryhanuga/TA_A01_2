@@ -57,12 +57,12 @@ public class PegawaiModel implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private RoleModel role;
 
-   //Relasi dengan Produksi
-   @OneToMany(mappedBy = "pegawai", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-   private List<ProduksiModel> listProduksi;
-//
-//    //Relasi dengan Delivery
-//    @OneToMany(mappedBy = "pegawai", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<DeliveryModel> listDelivery;
+    //Relasi dengan Produksi
+    @OneToMany(mappedBy = "pegawai", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ProduksiModel> listProduksi;
+
+    //Relasi dengan Delivery
+    @OneToMany(mappedBy = "pegawai", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<DeliveryModel> listDelivery;
 
 }

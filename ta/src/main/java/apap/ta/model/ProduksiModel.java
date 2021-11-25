@@ -56,9 +56,9 @@ public class ProduksiModel implements Serializable {
     private MesinModel mesin;
 
     //relasi dengan request update item
-     @OneToOne(cascade = CascadeType.ALL)
-     @JoinColumn(name="id_request_update_item", referencedColumnName="id_request_update_item")
-     private RequestUpdateItemModel RequestUpdateItem;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_request_update_item", referencedColumnName="id_request_update_item")
+    private RequestUpdateItemModel RequestUpdateItem;
 
 
 

@@ -46,9 +46,9 @@ public class MesinModel implements Serializable {
     @Column(name="kapasitas", nullable = false)
     private int kapasitas;
 
-   @OneToMany(mappedBy = "mesin", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-   @OnDelete(action = OnDeleteAction.CASCADE)
-   private List<ProduksiModel> listProduksi;
+    @OneToMany(mappedBy = "mesin", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<ProduksiModel> listProduksi;
 
 
 }
