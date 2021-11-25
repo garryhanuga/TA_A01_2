@@ -10,6 +10,8 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
@@ -19,7 +21,7 @@ import java.util.List;
 @Entity
 @Table(name="pegawai")
 
-public class PegawaiModel {
+public class PegawaiModel implements Serializable {
     @Id
     @Column(name="id_pegawai")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,12 +57,12 @@ public class PegawaiModel {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private RoleModel role;
 
-//    //Relasi dengan Produksi
-//    @OneToMany(mappedBy = "pegawai", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<ProduksiModel> listProduksi;
-//
-//    //Relasi dengan Delivery
-//    @OneToMany(mappedBy = "pegawai", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<DeliveryModel> listDelivery;
+    //Relasi dengan Produksi
+    @OneToMany(mappedBy = "pegawai", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ProduksiModel> listProduksi;
+
+    //Relasi dengan Delivery
+    @OneToMany(mappedBy = "pegawai", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<DeliveryModel> listDelivery;
 
 }

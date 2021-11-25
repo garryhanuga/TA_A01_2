@@ -11,6 +11,8 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import java.io.Serializable;
 import java.util.List;
 
 @AllArgsConstructor
@@ -19,7 +21,7 @@ import java.util.List;
 @Entity
 @Table(name="role")
 
-public class RoleModel {
+public class RoleModel implements Serializable {
     @Id
     @Column(name="id_role")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

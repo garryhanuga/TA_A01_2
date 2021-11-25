@@ -11,6 +11,8 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
@@ -21,7 +23,7 @@ import java.util.List;
 @Entity
 @Table(name="mesin")
 
-public class MesinModel {
+public class MesinModel implements Serializable {
     @Id
     @Column(name="id_mesin")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,8 +46,9 @@ public class MesinModel {
     @Column(name="kapasitas", nullable = false)
     private int kapasitas;
 
-//    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private List<ProduksiModel> pegawaiRole;
+    @OneToMany(mappedBy = "mesin", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<ProduksiModel> listProduksi;
+
+
 }
