@@ -50,7 +50,7 @@ public class RequestUpdateItemModel implements Serializable {
     private Long idCabang;
 
     @NotNull
-    @Column(name="executed", nullable = false, columnDefinition = "boolean default false")
+    @Column(name="executed", nullable = false, columnDefinition = "boolean default true")
     private Boolean executed;
 
     // Relasi dengan delivery
