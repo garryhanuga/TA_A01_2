@@ -12,26 +12,44 @@
 
 <nav th:replace="fragments/fragment :: navbar('')"></nav>
 <div class="container">
+    <br>
     <h2>Daftar Seluruh Pegawai Si Factory</h2>
     <br>
-    <div th:each="pegawai : ${listPegawai}" class="card m-4 p-4">
-        <div class="card-body">
-            <div class="justify-content-center">
-                <p th:text="'No Pegawai : ' + ${pegawai.noPegawai}"></p>
-                <p th:text="'Nama : ' + ${pegawai.namaPegawai}"></p>
-                <p th:if="${pegawai.jenisKelamin == 0}">Jenis Kelamin : Perempuan</p>
-                <p th:if="${pegawai.jenisKelamin == 1}">Jenis Kelamin : Laki-laki</p>
-                <p th:text="'Cabang : ' + ${pegawai.cabang.noCabang}"></p>
-                <br>
-                <a class="btn btn-warning" th:href="@{/pegawai/view/noCabang/} + ${pegawai.cabang.noCabang} + '/noPegawai/' + ${pegawai.noPegawai}">Lihat Detail
-                    Pegawai</a>
-                <a class="btn btn-primary" th:href="@{/pegawai/update/} + ${pegawai.cabang.noCabang} + '/' + ${pegawai.noPegawai}">Update Pegawai</a>
-                <a class="btn btn-danger" th:href="@{/pegawai/delete/} + ${pegawai.noPegawai}">Delete Pegawai</a>
-
+    <div class="card-body">
+        <div class="justify-content-center">
+            <div th:if="*{listPegawai.size() != 0}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Id Pegawai</th>
+                        <th>Nama Pegawai</th>
+                        <th>Tanggal Lahir</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="pegawai, iterationStatus : ${listPegawai}"
+                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${pegawai.idPegawai}"></td>
+                        <td th:text="${pegawai.pegawai}"></td>
+                        <td th:text="${pegawai.tanggalLahir}"></td>
+                        <td th:text="${pegawai.username}"></td>
+                        <td th:text="${pegawai.email}"></td>
+                        <td th:text="${pegawai.password}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:unless="*{listPegawai.size() != 0}">
+                <h2 th:text="'Tidak ada Pegawai'"></h2>
             </div>
         </div>
-        <br>
     </div>
+    <br>
     <a class="btn btn-primary" href="/">Home</a>
 </div>
 
