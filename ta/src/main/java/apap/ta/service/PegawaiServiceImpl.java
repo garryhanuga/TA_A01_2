@@ -3,7 +3,7 @@ package apap.ta.service;
 import apap.ta.model.PegawaiModel;
 import apap.ta.repository.PegawaiDb;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,17 +16,17 @@ public class PegawaiServiceImpl implements PegawaiService{
 
     @Override
     public PegawaiModel addPegawai(PegawaiModel pegawai) {
-        String pass = encrypt(pegawai.getPassword());
-        pegawai.setPassword(pass);
+//        String pass = encrypt(pegawai.getPassword());
+//        pegawai.setPassword(pass);
         return pegawaiDb.save(pegawai);
     }
 
-    @Override
-    public String encrypt(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(password);
-        return hashedPassword;
-    }
+//    @Override
+//    public String encrypt(String password) {
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        String hashedPassword = passwordEncoder.encode(password);
+//        return hashedPassword;
+//    }
 
     @Override
     public PegawaiModel getPegawai(String username) {
