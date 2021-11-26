@@ -33,10 +33,10 @@ public class ItemRestController {
         itemDetail.setResult(itemapi.block().getResult());
 
         itemapi.block().getResult();
-        System.out.println("masuk sini");
-        System.out.println(itemapi.block().getStatus());
-        System.out.println(itemapi.block().getMessage());
-        System.out.println(itemapi.block().getResult());
+//        System.out.println("masuk sini");
+//        System.out.println(itemapi.block().getStatus());
+//        System.out.println(itemapi.block().get());
+//        System.out.println(itemapi.block().getResult());
         ModelAndView modelAndView = new ModelAndView();
         return itemapi.block().getResult();
 
