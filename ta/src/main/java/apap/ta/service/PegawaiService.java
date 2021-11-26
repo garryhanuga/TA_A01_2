@@ -9,4 +9,6 @@ public interface PegawaiService {
     PegawaiModel getPegawai(String username);
     List<PegawaiModel> getPegawaiList();
     boolean checkUsername(String username);
+
+    List<Integer> getListGajiTiapPegawai();
 }

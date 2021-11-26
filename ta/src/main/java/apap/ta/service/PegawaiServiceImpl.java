@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,4 +48,16 @@ public class PegawaiServiceImpl implements PegawaiService{
             return false;
         }
     }
+
+    @Override
+    public List<Integer> getListGajiTiapPegawai() {
+        List<PegawaiModel> listPegawai = getPegawaiList();
+        List<Integer> listGajiTiapPegawai  = new ArrayList<>();
+        for (PegawaiModel pegawai : listPegawai){
+            int gaji = pegawai.getCounter() * pegawai.getRole().getBaseWages();
+            listGajiTiapPegawai.add(gaji);
+        }
+        return listGajiTiapPegawai;
+    }
+
 }

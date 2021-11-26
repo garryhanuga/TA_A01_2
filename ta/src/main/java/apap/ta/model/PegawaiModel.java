@@ -51,6 +51,10 @@ public class PegawaiModel implements Serializable {
     @Column(name="password", nullable = false)
     private String password;
 
+    @NotNull
+    @Column(name="counter", nullable = false)
+    private int counter;
+
     //Relasi dengan Role
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_role", referencedColumnName = "id_role", nullable = false)
