@@ -28,6 +28,7 @@
                         <th>Stok</th>
                         <th>Kategori</th>
                         <th>Action</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -40,15 +41,15 @@
                         <td th:text="${item.stok}"></td>
                         <td th:text="${item.kategori}"></td>
                         <td>
-                            <div class="row">
-                                <div class="col" sec:authorize="hasRole('STAFF_ GUDANG')">
-                                    <a class="btn btn-sm btn-warning">Update</a>
-                                </div>
-                                <div class="col">
-                                    <a class="btn btn-sm btn-warning">Detail</a>
-                                </div>
+                            <div class="col">
+                                <a class="btn btn-sm btn-warning">Detail</a>
                             </div>
 
+                        </td>
+                        <td th:if="${role == 'STAFF_GUDANG'}">
+                            <div class="col">
+                                <a class="btn btn-sm btn-warning">Update</a>
+                            </div>
                         </td>
                     </tr>
                     </tbody>

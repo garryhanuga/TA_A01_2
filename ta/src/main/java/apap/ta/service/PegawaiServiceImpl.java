@@ -59,4 +59,5 @@ public class PegawaiServiceImpl implements PegawaiService{
         }
         return listGajiTiapPegawai;
     }
+
 }

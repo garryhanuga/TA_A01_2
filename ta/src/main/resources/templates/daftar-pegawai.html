@@ -32,7 +32,7 @@
                         th:style="${iterationStatus.even} ? 'font-weight:bold;'">
                         <td th:text="${iterationStatus.count}"></td>
                         <td th:text="${pegawai.namaPegawai}"></td>
-                        <td th:text="${pegawai.role}"></td>
+                        <td th:text="${pegawai.role.namaRole}"></td>
                         <td th:text="${listGajiTiapPegawai[__${iterationStatus.index}__]}"></td>
                     </tr>
                     </tbody>
