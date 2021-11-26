@@ -18,8 +18,7 @@ public class ItemController {
     private String listItem(
             HttpServletResponse response,
             Model model
-    ) throws IOException {
-        response.sendRedirect("api/item/list-item");
+    ) {
 //        model.addAttribute("listItem", listItem);
         return "daftar-item";
     }
