@@ -33,18 +33,11 @@ public class ItemRestController {
         itemDetail.setResult(itemapi.block().getResult());
 
         itemapi.block().getResult();
-//        Map<String, Object> data = new HashMap<>();
-//        data.put("message", itemDetail.getMessage());
-//        data.put("status", itemDetail.getStatus());
-//        data.put("result", itemDetail.getResult());
-//        System.out.println(data.get("result"));
-//        model.addAttribute("listItem", data.get("result"));
         System.out.println("masuk sini");
+        System.out.println(itemapi.block().getStatus());
+        System.out.println(itemapi.block().getMessage());
         System.out.println(itemapi.block().getResult());
         ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("listItem",itemapi.block().getResult());
-//        modelAndView.setViewName("daftar-item");
-//        return itemapi.blok();
         return itemapi.block().getResult();
 
     }
