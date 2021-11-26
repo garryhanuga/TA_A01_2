@@ -27,8 +27,7 @@ public class RequestUpdateItemRestServiceImpl implements RequestUpdateItemRestSe
         rui.setIdItem(requestUpdateItem.getIdItem()); //id_item
         rui.setIdKategori(requestUpdateItem.getIdKategori()); //id_kategori
         rui.setTambahanStok(requestUpdateItem.getTambahanStok()); //tambahan_stok
-        java.util.Date date = new java.util.Date();
-        rui.setTanggalRequest(new Date(date.getTime())); //tanggal_request
+        rui.setTanggalRequest(requestUpdateItem.getTanggalRequest()); //tanggal_request
         rui.setIdCabang(requestUpdateItem.getIdCabang()); //id_Cabang
         rui.setExecuted(false); //executed
         return requestUpdateItemDb.save(rui);
