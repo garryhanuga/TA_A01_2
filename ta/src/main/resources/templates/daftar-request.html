@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SI-FACTORY : request</title>
+    <meta charset="UTF-8">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+
+<nav th:replace="fragments/fragment :: navbar('')"></nav>
+<div class="container">
+    <br>
+    <h2>Daftar Seluruh Request Update request</h2>
+    <br>
+    <div class="card-body">
+        <div class="justify-content-center">
+            <div th:if="*{listUpdate.size() != 0}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>ID Item</th>
+                        <th>ID Kategori</th>
+                        <th>Cabang</th>
+                        <th>Tambahan Stok</th>
+                        <th>Tanggal</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="request, iterationStatus : ${listUpdate}"
+                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${request.idItem}"></td>
+                        <td th:text="${request.idKategori}"></td>
+                        <td th:text="${request.idCabang}"></td>
+                        <td th:text="${request.tambahanStok}"></td>
+                        <td th:text="${request.tanggalRequest}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:unless="*{listUpdate.size() != 0}">
+                <h2 th:text="'Belum Ada Request Update request'"></h2>
+            </div>
+        </div>
+    </div>
+    <br>
+    <a class="btn btn-primary" href="/">Home</a>
+</div>
+</body>
+</html>
