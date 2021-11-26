@@ -3,7 +3,7 @@ package apap.ta.service;
 import apap.ta.model.PegawaiModel;
 import apap.ta.repository.PegawaiDb;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,17 +17,17 @@ public class PegawaiServiceImpl implements PegawaiService{
 
     @Override
     public PegawaiModel addPegawai(PegawaiModel pegawai) {
-//        String pass = encrypt(pegawai.getPassword());
-//        pegawai.setPassword(pass);
+        String pass = encrypt(pegawai.getPassword());
+        pegawai.setPassword(pass);
         return pegawaiDb.save(pegawai);
     }
 
-//    @Override
-//    public String encrypt(String password) {
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        String hashedPassword = passwordEncoder.encode(password);
-//        return hashedPassword;
-//    }
+    @Override
+    public String encrypt(String password) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(password);
+        return hashedPassword;
+    }
 
     @Override
     public PegawaiModel getPegawai(String username) {
@@ -39,15 +39,15 @@ public class PegawaiServiceImpl implements PegawaiService{
         return pegawaiDb.findAll();
     }
 
-    @Override
-    public boolean checkUsername(String username) {
-        if(!username.equals(pegawaiDb.findByUsername(username))){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+//    @Override
+//    public boolean checkUsername(String username) {
+//        if(getPegawai(username).equals(1)){
+//            return true;
+//        }
+//        else{
+//            return false;
+//        }
+//    }
 
     @Override
     public List<Integer> getListGajiTiapPegawai() {
