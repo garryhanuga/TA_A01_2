@@ -22,24 +22,18 @@
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Id Pegawai</th>
                         <th>Nama Pegawai</th>
-                        <th>Tanggal Lahir</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Password</th>
+                        <th>Role</th>
+                        <th>Gaji</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="pegawai, iterationStatus : ${listPegawai}"
                         th:style="${iterationStatus.even} ? 'font-weight:bold;'">
                         <td th:text="${iterationStatus.count}"></td>
-                        <td th:text="${pegawai.idPegawai}"></td>
-                        <td th:text="${pegawai.pegawai}"></td>
-                        <td th:text="${pegawai.tanggalLahir}"></td>
-                        <td th:text="${pegawai.username}"></td>
-                        <td th:text="${pegawai.email}"></td>
-                        <td th:text="${pegawai.password}"></td>
+                        <td th:text="${pegawai.namaPegawai}"></td>
+                        <td th:text="${pegawai.role}"></td>
+                        <td th:text="${listGajiTiapPegawai[__${iterationStatus.index}__]}"></td>
                     </tr>
                     </tbody>
                 </table>

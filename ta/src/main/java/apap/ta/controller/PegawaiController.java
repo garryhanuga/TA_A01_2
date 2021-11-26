@@ -17,7 +17,9 @@ public class PegawaiController {
     @GetMapping(value="/list-pegawai")
     private String listPegawai(Model model){
         List<PegawaiModel> listPegawai = pegawaiService.getPegawaiList();
+        List<Integer> listGajiTiapPegawai = pegawaiService.getListGajiTiapPegawai();
         model.addAttribute("listPegawai", listPegawai);
+        model.addAttribute("listGajiTiapPegawai", listGajiTiapPegawai);
         return "daftar-pegawai";
 
     }
