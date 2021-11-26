@@ -21,10 +21,6 @@ public class ItemController {
         itemDetail.setStatus(itemapi.block().getStatus());
         itemDetail.setResult(itemapi.block().getResult());
 
-        System.out.println("masuk sini getListItem di ItemController");
-        System.out.println(itemapi.block().getStatus());
-        System.out.println(itemapi.block().getMessage());
-        System.out.println(itemapi.block().getResult());
         model.addAttribute("listItem", itemapi.block().getResult());
         return "daftar-item";
     }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SI-FACTORY : Item</title>
+    <meta charset="UTF-8">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+
+<nav th:replace="fragments/fragment :: navbar('')"></nav>
+<div class="container">
+    <h2>Daftar Seluruh Pegawai Si Factory</h2>
+    <br>
+    <div th:each="pegawai : ${listPegawai}" class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <p th:text="'No Pegawai : ' + ${pegawai.noPegawai}"></p>
+                <p th:text="'Nama : ' + ${pegawai.namaPegawai}"></p>
+                <p th:if="${pegawai.jenisKelamin == 0}">Jenis Kelamin : Perempuan</p>
+                <p th:if="${pegawai.jenisKelamin == 1}">Jenis Kelamin : Laki-laki</p>
+                <p th:text="'Cabang : ' + ${pegawai.cabang.noCabang}"></p>
+                <br>
+                <a class="btn btn-warning" th:href="@{/pegawai/view/noCabang/} + ${pegawai.cabang.noCabang} + '/noPegawai/' + ${pegawai.noPegawai}">Lihat Detail
+                    Pegawai</a>
+                <a class="btn btn-primary" th:href="@{/pegawai/update/} + ${pegawai.cabang.noCabang} + '/' + ${pegawai.noPegawai}">Update Pegawai</a>
+                <a class="btn btn-danger" th:href="@{/pegawai/delete/} + ${pegawai.noPegawai}">Delete Pegawai</a>
+
+            </div>
+        </div>
+        <br>
+    </div>
+    <a class="btn btn-primary" href="/">Home</a>
+</div>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <title>SI-FACTORY : Item</title>
@@ -40,7 +40,15 @@
                         <td th:text="${item.stok}"></td>
                         <td th:text="${item.kategori}"></td>
                         <td>
-                            <a class="btn btn-sm btn-warning">Detail</a>
+                            <div class="row">
+                                <div class="col" sec:authorize="hasRole('STAFF_ GUDANG')">
+                                    <a class="btn btn-sm btn-warning">Update</a>
+                                </div>
+                                <div class="col">
+                                    <a class="btn btn-sm btn-warning">Detail</a>
+                                </div>
+                            </div>
+
                         </td>
                     </tr>
                     </tbody>
