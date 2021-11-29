@@ -39,6 +39,7 @@ public class ItemController {
         model.addAttribute("listItem", itemapi.block().getResult());
         String rolePegawai = auth.getAuthorities().toArray()[0].toString();
         model.addAttribute("role", rolePegawai);
+        System.out.println(rolePegawai);
 
         return "daftar-item";
     }

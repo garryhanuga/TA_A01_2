@@ -10,14 +10,14 @@
 </head>
 
 <body>
-<nav th:replace="fragments/fragment :: navbar('Home')"></nav>
+<nav th:replace="fragments/fragment :: navbar('Login')"></nav>
 <div class="container-fluid">
     <div class="row d-flex align-items-center flex-column justify-content-center h-100">
-        <h2>Hello!</h2>
         <div class="col-md-4">
-            <div class="card">
+            <h2>Hello!</h2>
+            <div class="card border-0">
                 <div class="card-body">
-                    <h2 class="card-title">Log In</h2>
+                    <h2 class="card-title text-center">Log In</h2>
                     <div th:if="${param.eror}">
                         <span style="color: red">Invalid username or password</span>
                     </div>
