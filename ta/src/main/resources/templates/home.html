@@ -19,6 +19,12 @@
         <div class="d-flex justify-content-center">
             <a th:href="@{/pegawai/list-pegawai}" class="mx-2 btn btn-dark">Lihat semua pegawai</a>
             <a th:href="@{/pegawai/add}" class="mx-2 btn btn-outline-dark">Tambah pegawai</a>
+            <div th:if="${role == 'STAFF_GUDANG'">
+                <a th:href="@{/item/list-request-update-item}" class="mx-2 btn btn-dark">Lihat daftar request update item</a>
+            </div>
+            <div th:if="${role== 'STAFF_OPERASIONAL'}">
+                <a th:href="@{/item/list-request-update-item}" class="mx-2 btn btn-dark">Lihat daftar request update item</a>
+            </div>
         </div>
 <!--        <div class="my-3 d-flex justify-content-center">-->
 <!--            <a th:href="@{/menu/viewall}" class="mx-2 btn btn-dark">Lihat semua menu</a>-->
