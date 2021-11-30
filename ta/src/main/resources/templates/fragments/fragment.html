@@ -39,8 +39,17 @@
             <li th:classappend="${page == 'Login'} ? active : ''" class="nav-item">
 
             </li>
-            <li th:classappend="${page == 'Home'} ? active : ''" class="nav-item">
-                <a class="nav-link" href="/">Home</a>
+            <li th:classappend="${page == 'Pegawai'} ? active : ''" class="nav-item">
+                <a class="nav-link" href="/list-pegawai" style="color: white; font-weight: bold">Pegawai</a>
+            </li>
+            <li th:classappend="${page == 'Item'} ? active : ''" class="nav-item">
+                <a class="nav-link" href="/list-item" style="color: white; font-weight: bold">Item</a>
+            </li>
+            <li th:classappend="${page == 'Delivery'} ? active : ''" class="nav-item">
+                <a class="nav-link" href="/" style="color: white; font-weight: bold">Delivery</a>
+            </li>
+            <li th:classappend="${page == 'Mesin'} ? active : ''" class="nav-item">
+                <a class="nav-link" href="/" style="color: white; font-weight: bold">Mesin</a>
             </li>
 <!--            <li th:classappend="${page == 'Cabang'} ? active : ''" class="nav-item">-->
 <!--                <a class="nav-link" href="/cabang/viewall">Cabang</a>-->

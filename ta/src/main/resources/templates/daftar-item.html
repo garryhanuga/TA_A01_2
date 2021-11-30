@@ -13,7 +13,7 @@
 <nav th:replace="fragments/fragment :: navbar('')"></nav>
 <div class="container">
     <br>
-    <h2>Daftar Seluruh Item</h2>
+    <h2 class="text-center">Daftar Seluruh Item</h2>
     <br>
     <div class="card-body p-0">
         <div class="justify-content-center">
@@ -40,14 +40,14 @@
                         <td th:text="${item.stok}"></td>
                         <td th:text="${item.kategori}"></td>
                         <td>
-                            <div class="col">
-                                <a class="btn btn-sm btn-warning">Detail</a>
+                            <div class="col p-0">
+                                <a class="btn btn-sm btn-warning" style="border-radius:20; width: 75px; font-weight: bold">Detail</a>
                             </div>
 
                         </td>
                         <td th:if="${role == 'STAFF_GUDANG'}">
-                            <div class="col">
-                                <a class="btn btn-sm btn-warning">Update</a>
+                            <div class="col p-0">
+                                <a class="btn btn-sm btn-warning" style="border-color: grey; border-radius:20; width: 75px; background-color: grey; color: white; font-weight: bold">Update</a>
                             </div>
                         </td>
                     </tr>
@@ -59,8 +59,9 @@
             </div>
         </div>
     </div>
-    <br>
-    <a class="btn btn-primary" href="/">Home</a>
+    <div class="justify-content-center">
+        <a class="btn btn-primary" href="/">Home</a>
+    </div>
 </div>
 </body>
 </html>

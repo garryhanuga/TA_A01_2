@@ -15,7 +15,7 @@
     <div class="m-4">
 
         <h2>Selamat datang di Si-Factory</h2>
-        <h3 th:text="'Hello ' + ${#httpServletRequest.remoteUser}+'!'">Login as</h3>
+        <h3 class="text-center" th:text="'Hello ' + ${namaPegawai}+'!'">Login as</h3>
         <div class="d-flex justify-content-center">
             <a th:href="@{/pegawai/list-pegawai}" class="mx-2 btn btn-dark">Lihat semua pegawai</a>
             <a th:href="@{/pegawai/add}" class="mx-2 btn btn-outline-dark">Tambah pegawai</a>
