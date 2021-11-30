@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <title>SI-FACTORY : Item</title>
+    <meta charset="UTF-8">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+
+<nav th:replace="fragments/fragment :: navbar('')"></nav>
+<div class="container">
+    <br>
+    <h2>Daftar Seluruh Item</h2>
+    <br>
+    <div class="card-body">
+        <div class="justify-content-center">
+            <div th:if="*{listItem.size() != 0}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>UUID</th>
+                        <th>Nama Item</th>
+                        <th>Harga</th>
+                        <th>Stok</th>
+                        <th>Kategori</th>
+                        <th>Action</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item, iterationStatus : ${listItem}"
+                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${item.uuid}"></td>
+                        <td th:text="${item.nama}"></td>
+                        <td th:text="${item.harga}"></td>
+                        <td th:text="${item.stok}"></td>
+                        <td th:text="${item.kategori}"></td>
+                        <td>
+                            <div class="col">
+                                <a class="btn btn-sm btn-warning">Detail</a>
+                            </div>
+
+                        </td>
+                        <td th:if="${role == 'STAFF_GUDANG'}">
+                            <div class="col">
+                                <a class="btn btn-sm btn-warning">Update</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:unless="*{listItem.size() != 0}">
+                <h2 th:text="'Tidak ada Item'"></h2>
+            </div>
+        </div>
+    </div>
+    <br>
+    <a class="btn btn-primary" href="/">Home</a>
+</div>
+</body>
+</html>

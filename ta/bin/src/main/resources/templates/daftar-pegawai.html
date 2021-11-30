@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SI-FACTORY : Item</title>
+    <meta charset="UTF-8">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+
+<nav th:replace="fragments/fragment :: navbar('')"></nav>
+<div class="container">
+    <br>
+    <h2>Daftar Seluruh Pegawai Si Factory</h2>
+    <br>
+    <div class="card-body">
+        <div class="justify-content-center">
+            <div th:if="*{listPegawai.size() != 0}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Pegawai</th>
+                        <th>Role</th>
+                        <th>Gaji</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="pegawai, iterationStatus : ${listPegawai}"
+                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${pegawai.namaPegawai}"></td>
+                        <td th:text="${pegawai.role.namaRole}"></td>
+                        <td th:text="${listGajiTiapPegawai[__${iterationStatus.index}__]}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:unless="*{listPegawai.size() != 0}">
+                <h2 th:text="'Tidak ada Pegawai'"></h2>
+            </div>
+        </div>
+    </div>
+    <br>
+    <a class="btn btn-primary" href="/">Home</a>
+</div>
+
+</body>
+</html>
