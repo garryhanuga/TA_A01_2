@@ -6,6 +6,8 @@ import apap.ta.service.PegawaiService;
 import apap.ta.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +31,11 @@ public class PegawaiController {
     private String listPegawai(Model model){
         List<PegawaiModel> listPegawai = pegawaiService.getPegawaiList();
         List<Integer> listGajiTiapPegawai = pegawaiService.getListGajiTiapPegawai();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getAuthorities());
+        String rolePegawai = auth.getAuthorities().toArray()[0].toString();
+        System.out.println(rolePegawai);
+        model.addAttribute("role", rolePegawai);
         model.addAttribute("listPegawai", listPegawai);
         model.addAttribute("listGajiTiapPegawai", listGajiTiapPegawai);
         return "daftar-pegawai";
