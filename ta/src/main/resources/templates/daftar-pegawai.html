@@ -13,9 +13,9 @@
 <nav th:replace="fragments/fragment :: navbar('')"></nav>
 <div class="container">
     <br>
-    <h2>Daftar Seluruh Pegawai Si Factory</h2>
-    <br>
     <div class="card-body">
+        <h2 class="text-center">Daftar Seluruh Pegawai Si Factory</h2>
+        <br>
         <div class="justify-content-center">
             <div th:if="*{listPegawai.size() != 0}">
                 <table class="table">

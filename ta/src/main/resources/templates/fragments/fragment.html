@@ -39,8 +39,17 @@
             <li th:classappend="${page == 'Login'} ? active : ''" class="nav-item">
 
             </li>
-            <li th:classappend="${page == 'Pegawai'} ? active : ''" class="nav-item">
-                <a class="nav-link" href="/list-pegawai" style="color: white; font-weight: bold">Pegawai</a>
+            <li th:if="${role == 'ADMIN'}" th:classappend="${page == 'Pegawai'} ? active : ''" class="nav-item">
+                <a class="nav-link" href="/pegawai/list-pegawai" style="color: white; font-weight: bold">Pegawai</a>
+            </li>
+            <li th:if="${role == 'FACTORY_MANAGER'}" th:classappend="${page == 'Rui'} ? active : ''" class="nav-item">
+                <a class="nav-link" th:href="@{/list-request-update-item}" style="color: white; font-weight: bold">RUI</a>
+            </li>
+            <li th:if="${role == 'STAFF_GUDANG'}" th:classappend="${page == 'Rui'} ? active : ''" class="nav-item">
+                <a class="nav-link" th:href="@{/list-request-update-item}" style="color: white; font-weight: bold">RUI</a>
+            </li>
+            <li th:if="${role == 'STAFF_OPERASIONAL'}" th:classappend="${page == 'Pegawai'} ? active : ''" class="nav-item">
+                <a class="nav-link" href="/pegawai/list-pegawai" style="color: white; font-weight: bold">Pegawai</a>
             </li>
             <li th:classappend="${page == 'Item'} ? active : ''" class="nav-item">
                 <a class="nav-link" href="/list-item" style="color: white; font-weight: bold">Item</a>
@@ -67,6 +76,9 @@
     </div>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:text="${role}"></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/logout}">Logout</a>
             </li>
