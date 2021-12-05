@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tambah pegawai</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment"></nav>
+
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Update Stok Item</h2>
+                <br>
+                <form th:action="@{/item/update}" method="POST">
+                    <label>Tambahan Stok</label>
+                    <input type="text" th:field="*{tambahan_stok}" class="form-control"/>             
+
+                    <label>Mesin</label>
+                    <Select th:field="*{pilmesin}" class="form-control">
+                        <option selected value="">--Pilih Mesin--</option>
+                        <option th:each="mesin: ${mesinList}"
+                                th:value="${mesin.idMesin}"
+                                th:text="${mesin.namaMesin}" >
+                        </option>
+                    </Select>
+                    <br>
+                    <br>
+                    <button type="submit" name="save" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-link" href="/">Home</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
