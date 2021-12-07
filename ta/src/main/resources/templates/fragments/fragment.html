@@ -57,6 +57,9 @@
             <li th:classappend="${page == 'Mesin'} ? active : ''" class="nav-item">
                 <a class="nav-link" href="/" style="color: #3B3B3B; font-weight: bold">Mesin</a>
             </li>
+            <li th:classappend="${page == 'Produksi'} ? active : ''" class="nav-item">
+                <a class="nav-link" href="/produksi/list-produksi" style="color: #3B3B3B; font-weight: bold">Produksi</a>
+            </li>
 <!--            <li th:classappend="${page == 'Cabang'} ? active : ''" class="nav-item">-->
 <!--                <a class="nav-link" href="/cabang/viewall">Cabang</a>-->
 <!--            </li>-->
@@ -73,11 +76,11 @@
     </div>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" th:text="${role}" style="color: #3B3B3B;"></a>
+            <li class="nav-item align-self-center">
+                <a class="text-bold" th:text="${role}" style="color: #3B3B3B; font-weight: bold; padding:10px;margin:0;width: 100px;border-color:transparent;"></a>
             </li>
             <li class="nav-item align-self-center">
-                <a class="btn nav-link m-0 p-1" th:href="@{/logout}" style="width: 90px;border-width : 3px;border-color:rgb(255, 91, 91); color:#525252">Logout</a>
+                <a class="btn" th:href="@{/logout}" style=" margin:0;width: 100px;border-width : 1px;border-color:rgb(255, 128, 128);">Logout</a>
             </li>
         </ul>
     </div>
