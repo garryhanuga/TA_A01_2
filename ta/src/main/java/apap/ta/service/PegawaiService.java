@@ -11,4 +11,5 @@ public interface PegawaiService {
 //    boolean checkUsername(String username);
 
     List<Integer> getListGajiTiapPegawai();
+//    PegawaiModel getPegawaiByIdPegawai(Long idPegawai);
 }

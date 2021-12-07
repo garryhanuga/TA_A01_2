@@ -11,6 +11,7 @@ import java.sql.Date;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -37,6 +38,15 @@ public class RequestUpdateItemRestServiceImpl implements RequestUpdateItemRestSe
     @Override
     public List<RequestUpdateItemModel> retrieveListRequestUpdateItem() {
         return requestUpdateItemDb.findAll();
+    }
+
+    @Override
+    public RequestUpdateItemModel getRequestItemModelByIdRequestItemModel(Long id) {
+        Optional<RequestUpdateItemModel> request = requestUpdateItemDb.findByidRequestUpdateItem(id);
+        if(request.isPresent()){
+            return request.get();
+        }
+        return null;
     }
 
     public RequestUpdateItemRestServiceImpl(WebClient.Builder webClientBuilder){

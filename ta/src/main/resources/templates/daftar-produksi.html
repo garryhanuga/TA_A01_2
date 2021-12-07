@@ -14,31 +14,25 @@
 <div class="container">
     <br>
     <div class="card-body p-0">
-        <h2 class="text-center" style="font-weight:bold">Daftar Seluruh Item</h2>
+        <h2 class="text-center" style="font-weight:bold">Daftar Seluruh Produksi</h2>
         <br>
         <div class="justify-content-center">
-            <div th:if="*{listItem.size() != 0}">
+            <div th:if="*{listProduksi.size() != 0}">
                 <table class="table">
                     <thead style="background-color: rgb(255, 91, 91); color:white">
                     <tr>
                         <th>No</th>
-                        <th>UUID</th>
-                        <th>Nama Item</th>
-                        <th>Harga</th>
-                        <th>Stok</th>
-                        <th>Kategori</th>
-                        <th class="text-center" colspan="2">Action</th>
+                        <th>Nama Mesin</th>
+                        <th>Nama Pegawai</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="item, iterationStatus : ${listItem}"
+                    <tr th:each="produksi, iterationStatus : ${listProduksi}"
                         th:style="${iterationStatus.even} ? 'font-weight:bold;'">
                         <td th:text="${iterationStatus.count}"></td>
-                        <td th:text="${item.uuid}"></td>
-                        <td th:text="${item.nama}"></td>
-                        <td th:text="${item.harga}"></td>
-                        <td th:text="${item.stok}"></td>
-                        <td th:text="${item.kategori}"></td>
+                        <td th:text="${produksi.mesin.namaMesin}"></td>
+                        <td th:text="${produksi.pegawai.namaPegawai}"></td>
+                
                         <td>
                             <div class="col p-0">
                                 <a class="btn btn-sm btn-warning" style="border-radius:20; width: 75px; font-weight: bold">Detail</a>
@@ -54,8 +48,8 @@
                     </tbody>
                 </table>
             </div>
-            <div th:unless="*{listItem.size() != 0}">
-                <h2 th:text="'Tidak ada Item'"></h2>
+            <div th:unless="*{listProduksi.size() != 0}">
+                <h2 th:text="'Tidak ada Produksi'"></h2>
             </div>
         </div>
     </div>

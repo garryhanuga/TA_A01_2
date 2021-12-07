@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Cabang</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('')"></nav>
+<div class="card m-4 p-4">
+    <div class="card-header">
+        <h3 style="text-align:center; font-weight:bold;">Detail Cabang</h3>
+    </div>
+    <div class="card-body">
+        <div class="justify-content-center">
+            <br>
+            <h3 th:text="'Mohon maaf, cabang dengan id ' + ${delivery.idCabang} + ' tidak ditemukan '" style="text-align:center"></h3>
+            <br>
+        </div>
+    </div>
+</div>
+<a class="btn" href="/">Kembali</a>
+</body>
+</html>

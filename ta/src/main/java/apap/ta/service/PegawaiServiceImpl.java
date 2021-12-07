@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-
 public class PegawaiServiceImpl implements PegawaiService{
     @Autowired
     PegawaiDb pegawaiDb;
@@ -59,5 +58,10 @@ public class PegawaiServiceImpl implements PegawaiService{
         }
         return listGajiTiapPegawai;
     }
+
+//    @Override
+//    public PegawaiModel getPegawaiByIdPegawai(Long idPegawai) {
+//        return pegawaiDb.findById(idPegawai);
+//    }
 
 }
