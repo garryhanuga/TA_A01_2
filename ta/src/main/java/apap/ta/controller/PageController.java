@@ -23,7 +23,6 @@ public class PageController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         PegawaiModel pegawai = pegawaiService.getPegawai(auth.getName());
         model.addAttribute("role", pegawai.getRole().getNamaRole());
-//        System.out.println(pegawai.getRole().getNamaRole());
         model.addAttribute("namaPegawai", pegawai.getNamaPegawai());
         return "home";
     }
