@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SI-FACTORY : Daftar Delivery</title>
+    <meta charset="UTF-8">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+
+<nav th:replace="fragments/fragment :: navbar('')"></nav>
+<div class="container">
+    <br>
+    <h2>Daftar Delivery</h2>
+    <br>
+    <div class="card-body">
+        <div class="justify-content-center">
+            <div th:if="*{listDelivery.size() != 0}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Kurir</th>
+                        <th>ID Cabang</th>
+                        <th>Tanggal Dibuat</th>
+                        <th>Tanggal Dikirim</th>
+                        <th>ID Request Update Item</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="delivery, iterationStatus : ${listDelivery}"
+                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${delivery.pegawai.namaPegawai}"></td>
+                        <td th:text="${delivery.idCabang}"></td>
+                        <td th:text="${delivery.tanggalDibuat}"></td>
+                        <td th:text="${delivery.tanggalDikirim}"></td>
+                        <td th:text="${delivery.RequestUpdateItem.idRequestUpdateItem}"></td>
+                        <td th:if="${delivery.sent == false}">
+                            <a class="btn btn-sm btn-primary"
+                               th:href="@{/api/v2/list-cabang/} + ${delivery.idDelivery} + '/' + ${delivery.idCabang}">Kirim</a>
+                        </td>
+                        <td th:if="${delivery.sent == true}"> Terkirim </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br>
+    <a class="btn btn-primary" href="/">Home</a>
+</div>
+
+</body>
+</html>

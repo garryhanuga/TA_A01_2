@@ -60,4 +60,9 @@ public class PegawaiServiceImpl implements PegawaiService{
         return listGajiTiapPegawai;
     }
 
+//    @Override
+//    public PegawaiModel getPegawaiByIdPegawai(Long idPegawai) {
+//        return pegawaiDb.findById(idPegawai);
+//    }
+
 }
