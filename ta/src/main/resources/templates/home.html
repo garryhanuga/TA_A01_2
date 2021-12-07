@@ -12,11 +12,11 @@
 
 <body>
 <nav th:replace="fragments/fragment :: navbar('Home')"></nav>
-<div class="d-flex flex-row justify-content-center">
-    <div class="p-2">
+<div class="d-flex flex-row align-items-center">
+    <div class="p-1">
         <div class="m-5">
-            <h3 class="text-left" th:text="'Hello ' + ${namaPegawai}+'!'">Login as</h3>
-            <h2 class="text-left" style="font-size: 50px; font-weight:bold">Selamat datang di Si-Factory</h2>
+            <h3 class="text-left" style="color:#525252" th:text="'Hello ' + ${namaPegawai}+'!'">Login as</h3>
+            <h2 class="text-left" style="color:#3B3B3B;font-size: 50px; font-weight:bold">Selamat datang di Si-Factory</h2>
             <div class="d-flex">
                 <a th:if="${role == 'FACTORY_MANAGER' || role == 'ADMIN'}"  th:href="@{/pegawai/list-pegawai}" class="mx-2 btn btn-dark">Lihat semua pegawai</a>
                 <a th:if="${role == 'FACTORY_MANAGER' || role == 'ADMIN'}" th:href="@{/pegawai/add}" class="mx-2 btn btn-outline-dark">Tambah pegawai</a>
