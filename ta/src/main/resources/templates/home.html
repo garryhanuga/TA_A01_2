@@ -16,7 +16,7 @@
     <div class="m-4">
         <h2 class="text-center">Selamat datang di Si-Factory</h2>
         <h3 class="text-center" th:text="'Hello ' + ${namaPegawai}+'!'">Login as</h3>
-        <img src="https://cdn-icons.flaticon.com/png/512/3256/premium/3256148.png?token=exp=1638846518~hmac=3b0e6a00aa0ae030a4a43575d3cc3db8" width="440" height="440">
+        <img th:src="@{/img/factory.png}" width="440" height="440">
         <div class="d-flex justify-content-center">
             <a th:href="@{/pegawai/list-pegawai}" class="mx-2 btn btn-dark">Lihat semua pegawai</a>
             <a th:href="@{/pegawai/add}" class="mx-2 btn btn-outline-dark">Tambah pegawai</a>
