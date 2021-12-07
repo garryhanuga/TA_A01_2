@@ -13,6 +13,8 @@ public interface DeliveryRestService {
     Mono<String> getListCabang();
     DeliveryModel getIdDelivery(Long idDelivery);
     Mono<String> getListCabangMock();
+    DeliveryModel updateDelivery(DeliveryModel delivery);
+
 //    List<DeliveryDetail> getListCabangRetail(Long idCabang);
 
 

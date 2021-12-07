@@ -18,9 +18,8 @@
                 <h2 class="text-center" style="font-weight:bold; color:#3B3B3B">Daftar Seluruh Delivery</h2>
                 <br>
                 <table class="table">
-                    <thead>
+                    <thead class="bg-danger" style="color:white">
                     <tr>
-                        <th>No</th>
                         <th>Nama Kurir</th>
                         <th>ID Cabang</th>
                         <th>Tanggal Dibuat</th>
@@ -31,19 +30,21 @@
                     </thead>
                     <tbody>
                     <tr th:each="delivery, iterationStatus : ${listDelivery}"
+                        th:if="${nama == delivery.pegawai.idPegawai || role == 'STAFF_OPERASIONAL'} "
                         th:style="${iterationStatus.even} ? 'font-weight:bold;'">
-                        <td th:text="${iterationStatus.count}"></td>
-                        <td th:text="${delivery.pegawai.namaPegawai}"></td>
-                        <td th:text="${delivery.idCabang}"></td>
-                        <td th:text="${delivery.tanggalDibuat}"></td>
-                        <td th:text="${delivery.tanggalDikirim}"></td>
-                        <td th:text="${delivery.RequestUpdateItem.idRequestUpdateItem}"></td>
-                        <td th:if="${delivery.sent == false}">
-                            <a class="btn btn-sm btn-primary"
-                               th:href="@{/api/v2/list-cabang/} + ${delivery.idDelivery} + '/' + ${delivery.idCabang}">Kirim</a>
-                        </td>
-                        <td th:if="${delivery.sent == true}"> Terkirim </td>
-
+<!--                        <div th:if="${nama == delivery.pegawai.idPegawai}">-->
+                            <td th:text="${delivery.pegawai.namaPegawai}"></td>
+                            <td th:text="${delivery.idCabang}"></td>
+                            <td th:text="${delivery.tanggalDibuat}"></td>
+                            <td th:text="${delivery.tanggalDikirim}"></td>
+                            <td th:text="${delivery.RequestUpdateItem.idRequestUpdateItem}"></td>
+                            <td th:if="${delivery.sent == false}">
+                                <a class="btn btn-sm btn-primary"
+                                   style="background-color: white;width: 8rem; padding: 2px; margin: 0px; border-radius:10px;"
+                                   th:href="@{/api/v2/list-cabang/} + ${delivery.idDelivery} + '/' + ${delivery.idCabang}">Kirim</a>
+                            </td>
+                            <td th:if="${delivery.sent == true}"> Terkirim </td>
+<!--                        </div>-->
                     </tr>
                     </tbody>
                 </table>
