@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+
 public class PegawaiServiceImpl implements PegawaiService{
     @Autowired
     PegawaiDb pegawaiDb;

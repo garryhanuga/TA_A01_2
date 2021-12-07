@@ -12,12 +12,11 @@
 
 <nav th:replace="fragments/fragment :: navbar('')"></nav>
 <div class="container">
-    <br>
-    <h2 class="text-center" style="font-weight:bold">Daftar Delivery</h2>
-    <br>
     <div class="card-body">
         <div class="justify-content-center">
             <div th:if="*{listDelivery.size() != 0}">
+                <h2 class="text-center" style="font-weight:bold; color:#3B3B3B">Daftar Seluruh Delivery</h2>
+                <br>
                 <table class="table">
                     <thead class="bg-danger" style="color:white">
                     <tr>
@@ -50,10 +49,17 @@
                     </tbody>
                 </table>
             </div>
+            <div th:unless="*{listDelivery.size() != 0}">
+                <div class="d-flex flex-column align-items-center">
+                    <h2 class="p-1 text-center" style="color: grey; font-size: 40px; font-weight: bold;" th:text="'Tidak ada Delivery'"></h2>
+                <img class="p-2 img-fluid" alt="Responsive image" th:src="@{/img/emptydata.jpg}" width="50%">
+                </div>
+
+            </div>
         </div>
-    </div>
-    <div class="card" style="background-color: white;width: 8rem; padding: 0px; margin: 0px; border-radius:10px; border-color:transparent">
-        <a class="mx-2 btn btn-dark" style="color: rgb(255, 91, 91)" href="/">Home</a>
+        <div class="card align-items-center" style="background-color: white;width: 100%; padding: 0px; margin: 0px; border-radius:10px; border-color:transparent">
+            <a class="btn btn-dark" href="/">Kembali</a>
+        </div>
     </div>
 </div>
 
