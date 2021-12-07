@@ -5,6 +5,8 @@ import apap.ta.model.PegawaiModel;
 import apap.ta.model.RequestUpdateItemModel;
 import apap.ta.service.DeliveryRestService;
 import apap.ta.service.PegawaiService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import apap.ta.service.RequestUpdateItemRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -70,6 +72,9 @@ public class DeliveryController {
 
     @GetMapping("/list-delivery")
     public String listDelivery(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        PegawaiModel peg = pegawaiService.getPegawai(auth.getName());
+        model.addAttribute("role", peg.getRole().getNamaRole());
         List<DeliveryModel> listDelivery = deliveryRestService.getDeliveryList();
         model.addAttribute("listDelivery", listDelivery);
         return "daftar-delivery";

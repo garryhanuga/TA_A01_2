@@ -14,12 +14,12 @@
 <div class="container">
     <br>
     <div class="card-body p-0">
-        <h2 class="text-center">Daftar Seluruh Item</h2>
+        <h2 class="text-center" style="font-weight:bold">Daftar Seluruh Item</h2>
         <br>
         <div class="justify-content-center">
             <div th:if="*{listItem.size() != 0}">
                 <table class="table">
-                    <thead>
+                    <thead style="background-color: rgb(255, 91, 91); color:white">
                     <tr>
                         <th>No</th>
                         <th>UUID</th>
@@ -59,8 +59,8 @@
             </div>
         </div>
     </div>
-    <div class="justify-content-center">
-        <a class="btn btn-primary" href="/">Home</a>
+    <div class="card" style="background-color: white;width: 8rem; padding: 0px; margin: 0px; border-radius:10px; border-color:transparent">
+        <a class="mx-2 btn btn-dark" style="color: rgb(255, 91, 91)" href="/">Home</a>
     </div>
 </div>
 </body>
