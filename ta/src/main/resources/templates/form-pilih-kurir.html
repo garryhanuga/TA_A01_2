@@ -1,24 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
 <head>
+    <title>SI-FACTORY : Daftar Kurir</title>
     <meta charset="UTF-8">
-    <title>Daftar Kurir</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
 <nav th:replace="fragments/fragment"></nav>
-
-<label>Daftar Kurir</label>
-<Select name="kurir" class="form-control">
-    <option selected value="">--Pilih Kurir--</option>
-    <option th:each="role: ${listKurir}"
-            th:value="${kurir.idPegawai}"
-            th:text="${kurir.namaPegawai}" >
-    </option>
-</Select>
+<div class="card m-4 p-4">
+    <div class="card-header bg-danger">
+        <h3 style="text-align:center; font-weight:bold; color:white;">Pilih Kurir</h3>
+    </div>
+    <div class="card-body">
+        <div class="justify-content-center">
+            <label>Daftar Kurir</label>
+            <Select name="kurir" class="form-control">
+                <option selected value="">Pilih Kurir</option>
+                <option th:each="kurir: ${listKurir}"
+                        th:value="${kurir.idPegawai}"
+                        th:text="${kurir.namaPegawai}">
+                </option>
+            </Select>
+        </div>
+    </div>
 <button class="btn btn-primary" type="submit" name="submit">Submit</button>
-
+</div>
 </body>
 </html>

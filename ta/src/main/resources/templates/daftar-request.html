@@ -39,10 +39,10 @@
                         <td th:text="${request.idCabang}"></td>
                         <td th:text="${request.tambahanStok}"></td>
                         <td th:text="${request.tanggalRequest}"></td>
-                        <td th:if="${request.executed == 1}">
-                            <a class="btn btn-sm btn-primary" th:href="@{/delivery/add/}">Buat Delivery</a>
+                        <td th:if="${request.executed == true}">
+                            <a class="btn btn-sm btn-primary" th:href="@{/delivery/add/} + ${request.idRequestUpdateItem} + '/' + ${request.idCabang} ">Buat Delivery</a>
                         </td>
-                        <td th:unless="${request.executed == 0}">
+                        <td th:if="${request.executed == false}">
                             <a class="btn btn-sm btn-primary" th:href="@{/delivery/update/}">Update</a>
                         </td>
                     </tr>

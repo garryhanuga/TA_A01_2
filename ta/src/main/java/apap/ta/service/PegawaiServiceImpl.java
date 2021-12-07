@@ -38,6 +38,11 @@ public class PegawaiServiceImpl implements PegawaiService{
         return pegawaiDb.findAll();
     }
 
+    @Override
+    public PegawaiModel updatePegawai(PegawaiModel pegawai) {
+        return pegawaiDb.save(pegawai);
+    }
+
 //    @Override
 //    public boolean checkUsername(String username) {
 //        if(getPegawai(username).equals(1)){
