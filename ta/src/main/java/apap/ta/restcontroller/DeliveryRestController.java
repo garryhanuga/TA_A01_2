@@ -1,8 +1,10 @@
 package apap.ta.restcontroller;
 import apap.ta.model.DeliveryModel;
+import apap.ta.model.PegawaiModel;
 import apap.ta.rest.DeliveryDetail;
 import apap.ta.rest.Setting;
 import apap.ta.service.DeliveryRestService;
+import apap.ta.service.PegawaiServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,9 @@ public class DeliveryRestController {
     private DeliveryRestService deliveryRestService;
 
     @Autowired
+    private PegawaiServiceImpl pegawaiService;
+
+    @Autowired
     RestTemplate restTemplate;
 
 //    @GetMapping(value = "/list-cabang")
@@ -36,6 +41,7 @@ public class DeliveryRestController {
             @PathVariable Long idCabang,
             Model model){
         DeliveryModel delivery = deliveryRestService.getIdDelivery(idDelivery);
+        PegawaiModel pegawai = delivery.getPegawai();
         int counter = delivery.getPegawai().getCounter();
         String cabangUrl = Setting.cabangUrl + idCabang;
         List listCabangRest = restTemplate.getForObject(cabangUrl, List.class);
@@ -58,22 +64,18 @@ public class DeliveryRestController {
 
         for(DeliveryDetail cabang: cabangDelivery){
             if(cabang.getIdCabang().equals(idCabang)){
-                System.out.println("sebelum diset  " + delivery.getSent());
+                counter+=1;
                 delivery.setSent(true);
-                delivery.getPegawai().setCounter(counter++);
-                System.out.println("counter kurir " + counter);
-                System.out.println(delivery.getSent());
+                delivery.getPegawai().setCounter(counter);
+                deliveryRestService.updateDelivery(delivery);
+                pegawaiService.updatePegawai(pegawai);
                 model.addAttribute("cabang", cabang);
                 model.addAttribute("delivery", delivery);
                 return "cabang-found";
             }
-            else{
-                System.out.println(delivery.getSent());
-                model.addAttribute("delivery", delivery);
-                return "cabang-not-found";
-            }
         }
-        return null;
+        model.addAttribute("delivery", delivery);
+        return "cabang-not-found";
     }
 
 

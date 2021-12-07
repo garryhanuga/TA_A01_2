@@ -31,19 +31,22 @@ public class DeliveryController {
     @Autowired
     RequestUpdateItemRestService requestUpdateItemRestService;
 
-    @GetMapping(value="/delivery/add/{idRequestUpdateItem}")
+    @GetMapping(value="/delivery/add/{idRequestUpdateItem}/{idCabang}")
     private String assignDeliveryForm(
             @PathVariable Long idRequestUpdateItem,
+            @PathVariable Long idCabang,
             Model model
     ) {
         DeliveryModel delivery = new DeliveryModel();
         RequestUpdateItemModel requestUpdateItem = requestUpdateItemRestService.getRequestItemModelByIdRequestItemModel(idRequestUpdateItem);
         delivery.setRequestUpdateItem(requestUpdateItem);
+        delivery.setIdCabang(idCabang);
         List<PegawaiModel> listPegawai =  pegawaiService.getPegawaiList();
         List<PegawaiModel> listKurir = new ArrayList<>();
         for(PegawaiModel pegawai : listPegawai){
-            if(pegawai.getRole().equals("STAFF_KURIR")){
+            if(pegawai.getRole().getNamaRole().equals("STAFF_KURIR")){
                 listKurir.add(pegawai);
+                System.out.println(pegawai.getIdPegawai());
             }
         }
         model.addAttribute("listKurir", listKurir);
@@ -74,6 +77,8 @@ public class DeliveryController {
     public String listDelivery(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         PegawaiModel peg = pegawaiService.getPegawai(auth.getName());
+        System.out.println("nama kurir" + peg.getNamaPegawai());
+        model.addAttribute("nama", peg.getIdPegawai());
         model.addAttribute("role", peg.getRole().getNamaRole());
         List<DeliveryModel> listDelivery = deliveryRestService.getDeliveryList();
         model.addAttribute("listDelivery", listDelivery);

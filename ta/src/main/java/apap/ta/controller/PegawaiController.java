@@ -64,8 +64,8 @@ public class PegawaiController {
                 return "error-add-pegawai";
             }
         }
-        pegawaiService.addPegawai(pegawai);
         pegawai.setCounter(0);
-        return "home";
+        pegawaiService.addPegawai(pegawai);
+        return "add-pegawai";
     }
 }
