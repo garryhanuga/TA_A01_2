@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+
 public class PegawaiServiceImpl implements PegawaiService{
     @Autowired
     PegawaiDb pegawaiDb;
@@ -36,6 +37,11 @@ public class PegawaiServiceImpl implements PegawaiService{
     @Override
     public List<PegawaiModel> getPegawaiList() {
         return pegawaiDb.findAll();
+    }
+
+    @Override
+    public PegawaiModel updatePegawai(PegawaiModel pegawai) {
+        return pegawaiDb.save(pegawai);
     }
 
 //    @Override
