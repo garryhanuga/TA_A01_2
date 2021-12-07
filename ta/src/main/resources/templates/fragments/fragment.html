@@ -77,10 +77,10 @@
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" th:text="${role}"></a>
+                <a class="nav-link" th:text="${role}" style="color: white"></a>
             </li>
-            <li class="nav-item">
-                <button class="btnnav-link" th:href="@{/logout}">Logout</button>
+            <li class="nav-item align-self-center">
+                <a class="btn nav-link m-0 p-1" th:href="@{/logout}" style="width: 90px; border-color:transparent;">Logout</a>
             </li>
         </ul>
     </div>
