@@ -57,6 +57,11 @@ public class DeliveryRestServiceImpl implements DeliveryRestService{
         return this.webClient.get().uri("/rest/listCabang/").retrieve().bodyToMono(String.class);
     }
 
+    @Override
+    public DeliveryModel updateDelivery(DeliveryModel delivery) {
+        return deliveryDb.save(delivery);
+    }
+
 
 //    @Override
 //    public List<DeliveryDetail> getListCabangRetail(Long idCabang) {

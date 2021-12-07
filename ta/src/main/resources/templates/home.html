@@ -22,8 +22,12 @@
                 <a th:if="${role == 'FACTORY_MANAGER' || role == 'ADMIN'}" th:href="@{/pegawai/add}" class="mx-2 btn btn-outline-dark">Tambah pegawai</a>
             </div>
             <div class="d-flex">
-                <a th:href="@{/list-delivery}" class="mx-2 btn btn-dark">Daftar Delivery</a>
+                <a th:if="${role == 'STAFF_KURIR' || role == 'STAFF_OPERASIONAL'}"th:href="@{/list-delivery}" class="mx-2 btn btn-dark">Daftar Delivery</a>
                 <a th:href="@{/list-item}" class="mx-2 btn btn-outline-dark">Daftar Item</a>
+            </div>
+            <div class="d-flex">
+                <a th:if="${role == 'STAFF_ GUDANG' || role == 'STAFF_OPERASIONAL'}"th:href="@{/list-request-update-item}" class="mx-2 btn btn-dark">Daftar Request Update Item</a>
+<!--                <a th:href="@{/list-item}" class="mx-2 btn btn-outline-dark">Daftar Request Update Item</a>-->
             </div>
     <!--        <div class="my-3 d-flex justify-content-center">-->
     <!--            <a th:href="@{/user/viewall}" class="mx-2 btn btn-dark">Lihat semua user</a>-->
