@@ -47,7 +47,7 @@
             </table>
         </div>
     </div>
-    <div class="card border-0 mb-5 rounded" >
+    <div th:if="*{listProduksi.size() != 0}"class="card border-0 mb-5 rounded" >
         <h3 class="card-header bg-white border-0 text-center"style=" color: grey">Riwayat Produksi Item</h3>
         <div class="card-body">
             <table class="table">
@@ -74,6 +74,13 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div th:unless="*{listProduksi.size() != 0}">
+        <div class="d-flex flex-column align-items-center">
+            <h2 class="p-1 text-center" style="color: grey; font-size: 40px; font-weight: bold;" th:text="'Tidak ada riwayat produksi !'"></h2>
+            <img class="p-2 img-fluid" alt="Responsive image" th:src="@{/img/emptydata.jpg}" width="50%">
+        </div>
+
     </div>
     <div class="card align-items-center" style="background-color: white;width: 100%; padding: 0px; margin: 0px; border-radius:10px; border-color:transparent">
         <a class="btn btn-dark" href="/">Kembali</a>
