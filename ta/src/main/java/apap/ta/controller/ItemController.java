@@ -5,7 +5,7 @@ import apap.ta.model.MesinModel;
 import apap.ta.model.PegawaiModel;
 import apap.ta.model.ProduksiModel;
 import apap.ta.model.RequestUpdateItemModel;
-
+import apap.ta.rest.ItemDetail;
 import apap.ta.rest.ListItemDetail;
 import apap.ta.service.ItemRestService;
 import apap.ta.service.MesinRestService;
@@ -17,6 +17,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,21 +31,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Controller
 public class ItemController {
     @Autowired
     private ItemRestService itemRestService;
-    
-    @Autowired
-    private RequestUpdateItemRestService ruirs;
 
     @Autowired
-    private ProduksiService produksiService;
+    private PegawaiServiceImpl pegawaiService;
+
+    @Autowired
+    private RequestUpdateItemRestService ruirs;
 
     @Autowired
     private MesinRestService mesinService;
@@ -180,8 +186,6 @@ public class ItemController {
         @PathVariable ("harga") String harga,
         Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        List<ProduksiModel> listProduksiItem = produksiService.filterProduksiByItem(uuid);
-        model.addAttribute("listProduksi", listProduksiItem);
         model.addAttribute("uuid",uuid);
         model.addAttribute("nama",nama);
         model.addAttribute("stok",stok);
@@ -190,6 +194,5 @@ public class ItemController {
         String rolePegawai = auth.getAuthorities().toArray()[0].toString();
         model.addAttribute("role", rolePegawai);
         return "detail-item";
-
     }
 }
