@@ -15,7 +15,7 @@
     <div class="card-body">
         <div class="justify-content-center">
             <div th:if="*{listUpdate.size() != 0}">
-                <h2 class="text-center" style="font-weight:bold; color:#3B3B3B">Daftar Seluruh Request Update request</h2>
+                <h2 class="text-center" style="font-weight:bold; color:#3B3B3B">Daftar Seluruh Request Update Item</h2>
                 <br>
                 <table class="table">
                     <thead style="background-color: rgb(255, 91, 91); color:white">
@@ -38,11 +38,11 @@
                         <td th:text="${request.idCabang}"></td>
                         <td th:text="${request.tambahanStok}"></td>
                         <td th:text="${request.tanggalRequest}"></td>
-                        <td th:if="${request.executed == true}">
+                        <td th:if="${request.executed == true && role == 'STAFF_OPERASIONAL'}">
                             <a class="btn btn-sm btn-primary" th:href="@{/delivery/add/} + ${request.idRequestUpdateItem} + '/' + ${request.idCabang} ">Buat Delivery</a>
                         </td>
                         <td th:if="${request.executed == false}">
-                            <a class="btn btn-sm btn-primary" th:href="@{/delivery/update/}">Update</a>
+                            <a class="btn btn-sm btn-primary" th:href="@{/request/update/} + ${request.idRequestUpdateItem}">Update</a>
                         </td>
                     </tr>
                     </tbody>
@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="card align-items-center" style="background-color: white;width: 100%; padding: 0px; margin: 0px; border-radius:10px; border-color:transparent">
-            <a class="mx-2 btn btn-dark" style="color: rgb(255, 91, 91)" href="/">Home</a>
+            <a class="btn btn-dark" href="/">Kembali</a>
         </div>
     </div>
     <br>

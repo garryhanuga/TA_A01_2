@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <title>SI-FACTORY : Item</title>
+    <meta charset="UTF-8">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+
+<nav th:replace="fragments/fragment :: navbar('')"></nav>
+<div class="container">
+    <div class="card border-0 shadow-sm mb-5 rounded" >
+        <h3 class="card-header bg-danger border-0 text-center"style=" color: #ffff">Detail Item</h3>
+        <div class="card-body">
+            <table class="table table-borderless">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th class="col-lg-3" scope="row">UUID</th>
+                    <td class="col-lg-9" th:text="': '+${uuid}"></td>
+                </tr>
+                <tr>
+                    <th class="col-lg-3" scope="row">Nama Item</th>
+                    <td class="col-lg-9" th:text="': '+${nama}"></td>
+                </tr>
+                <tr>
+                    <th class="col-lg-3" scope="row">Harga</th>
+                    <td class="col-lg-9" th:text="': '+${harga}"></td>
+                </tr>
+                <tr>
+                    <th class="col-lg-3" scope="row">Stok Item</th>
+                    <td class="col-lg-9" th:text="': '+${stok}"></td>
+                </tr>
+                <tr>
+                    <th class="col-lg-3" scope="row">Kategori</th>
+                    <td class="col-lg-9" th:text="': '+${kategori}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div th:if="*{listProduksi.size() != 0}"class="card border-0 mb-5 rounded" >
+        <h3 class="card-header bg-white border-0 text-center"style=" color: grey">Riwayat Produksi Item</h3>
+        <div class="card-body">
+            <table class="table">
+                <thead style="color:grey">
+                <tr>
+                    <th>No</th>
+                    <th>Nama Kategori</th>
+                    <th>Tambahan Stok</th>
+                    <th>Tanggal Produksi</th>
+                    <th>Nama Mesin</th>
+                    <th>Nama Pegawai</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="produksi, iterationStatus : ${listProduksi}"
+                    th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${kategori}"></td>
+                    <td th:text="${produksi.tambahanStok}"></td>
+                    <td th:text="${produksi.tanggalProduksi}"></td>
+                    <td th:text="${produksi.mesin.namaMesin}"></td>
+                    <td th:text="${produksi.pegawai.namaPegawai}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div th:unless="*{listProduksi.size() != 0}">
+        <div class="d-flex flex-column align-items-center">
+            <h2 class="p-1 text-center" style="color: grey; font-size: 40px; font-weight: bold;" th:text="'Tidak ada riwayat produksi !'"></h2>
+            <img class="p-2 img-fluid" alt="Responsive image" th:src="@{/img/emptydata.jpg}" width="50%">
+        </div>
+
+    </div>
+    <div class="card align-items-center" style="background-color: white;width: 100%; padding: 0px; margin: 0px; border-radius:10px; border-color:transparent">
+        <a class="btn btn-dark" href="/">Kembali</a>
+    </div>
+</div>
+</body>
+</html>

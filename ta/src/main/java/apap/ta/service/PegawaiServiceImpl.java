@@ -55,6 +55,12 @@ public class PegawaiServiceImpl implements PegawaiService{
 //    }
 
     @Override
+    public void addCounter(PegawaiModel pegawai) {
+        int newCount = pegawai.getCounter() + 1;
+        pegawai.setCounter(newCount);
+        pegawaiDb.save(pegawai);
+    }
+    @Override
     public List<Integer> getListGajiTiapPegawai() {
         List<PegawaiModel> listPegawai = getPegawaiList();
         List<Integer> listGajiTiapPegawai  = new ArrayList<>();
