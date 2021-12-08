@@ -83,7 +83,6 @@ public class DeliveryController {
     public String listDelivery(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         PegawaiModel peg = pegawaiService.getPegawai(auth.getName());
-        System.out.println("nama kurir" + peg.getNamaPegawai());
         model.addAttribute("nama", peg.getIdPegawai());
         model.addAttribute("role", peg.getRole().getNamaRole());
         List<DeliveryModel> listDelivery = deliveryRestService.getDeliveryList();

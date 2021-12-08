@@ -121,6 +121,7 @@ public class ItemController {
         String rolePegawai = auth.getAuthorities().toArray()[0].toString();
 
         model.addAttribute("role", rolePegawai);
+        model.addAttribute("rui", 0);
         model.addAttribute("item", uuid);
         model.addAttribute("tambahan_stok", add_stok);
         model.addAttribute("mesinList", mesinList);
@@ -130,7 +131,8 @@ public class ItemController {
     }
 
     @PostMapping(value = "/item/update")
-    public String updateItemSubmit(String item, Integer tambahan_stok, Long pilmesin, Model model) {
+    public String updateItemSubmit(Long rui, String item, Integer tambahan_stok, Long pilmesin, Model model) {
+        RequestUpdateItemModel ruim = ruirs.getRequestById(rui);
         ItemDetail idet = itemRestService.getItem(item);
         MesinModel mesin = mesinService.getMesinById(pilmesin);
         int total_stok = idet.getStok() + tambahan_stok;
@@ -141,6 +143,7 @@ public class ItemController {
             Date dt = new Date();
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             PegawaiModel pegawai = pegawaiService.getPegawai(auth.getName());
+            prod.setRequestUpdateItem(ruim);
             prod.setIdItem(updated.getUuid());
             prod.setIdKategori(idkat);
             prod.setMesin(mesin);
@@ -152,7 +155,9 @@ public class ItemController {
             mesinService.updateMesin(mesin);
 
             pegawaiService.addCounter(pegawai);
-
+            if (rui != 0) {
+                ruirs.executeRui(rui);
+            }
             model.addAttribute("nmitem", updated.getNama());
             model.addAttribute("stok", tambahan_stok);
             model.addAttribute("nmmesin", mesin.getNamaMesin());
@@ -168,6 +173,7 @@ public class ItemController {
         String rolePegawai = auth.getAuthorities().toArray()[0].toString();
 
         model.addAttribute("role", rolePegawai);
+        model.addAttribute("rui", rui.getIdRequestUpdateItem());
         model.addAttribute("item", rui.getIdItem());
         model.addAttribute("tambahan_stok", rui.getTambahanStok());
         model.addAttribute("mesinList", mesinList);

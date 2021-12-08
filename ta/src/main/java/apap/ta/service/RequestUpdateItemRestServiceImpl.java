@@ -53,6 +53,13 @@ public class RequestUpdateItemRestServiceImpl implements RequestUpdateItemRestSe
         return null;
     }
 
+    @Override
+    public void executeRui(Long id) {
+        RequestUpdateItemModel ruim = requestUpdateItemDb.getById(id);
+        ruim.setExecuted(true);
+        requestUpdateItemDb.save(ruim);
+    }
+
     public RequestUpdateItemRestServiceImpl(WebClient.Builder webClientBuilder){
         this.webClient = webClientBuilder.baseUrl(Setting.requestUpdateItemUrl).build();
     }

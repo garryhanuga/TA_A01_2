@@ -17,6 +17,7 @@
                 <h2>Update Stok Item</h2>
                 <br>
                 <form th:action="@{/item/update}" method="POST">
+                    <input type="hidden" name="rui" id="rui" th:value="${rui}" />
                     <input type="hidden" name="item" id="item" th:value="${item}" />
                     <label>Tambahan Stok</label>
                     <div th:if="${tambahan_stok == 0}">

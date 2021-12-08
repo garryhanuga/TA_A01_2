@@ -10,5 +10,5 @@ public interface RequestUpdateItemRestService {
     List<RequestUpdateItemModel> retrieveListRequestUpdateItem();
     RequestUpdateItemModel getRequestById(Long id);
     RequestUpdateItemModel getRequestItemModelByIdRequestItemModel(Long id);
-
+    void executeRui(Long id);
 }
