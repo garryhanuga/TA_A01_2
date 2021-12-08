@@ -186,11 +186,13 @@ public class ItemController {
         @PathVariable ("harga") String harga,
         Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<ProduksiModel> listProduksi = produksiService.filterProduksiByItem(uuid);
         model.addAttribute("uuid",uuid);
         model.addAttribute("nama",nama);
         model.addAttribute("stok",stok);
         model.addAttribute("kategori",kategori);
         model.addAttribute("harga",harga);
+        model.addAttribute("listProduksi", listProduksi);
         String rolePegawai = auth.getAuthorities().toArray()[0].toString();
         model.addAttribute("role", rolePegawai);
         return "detail-item";
