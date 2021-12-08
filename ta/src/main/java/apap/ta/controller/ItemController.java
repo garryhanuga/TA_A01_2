@@ -5,12 +5,12 @@ import apap.ta.model.MesinModel;
 import apap.ta.model.PegawaiModel;
 import apap.ta.model.ProduksiModel;
 import apap.ta.model.RequestUpdateItemModel;
-import apap.ta.repository.MesinDb;
 import apap.ta.rest.ItemDetail;
 import apap.ta.rest.ListItemDetail;
 import apap.ta.service.ItemRestService;
+import apap.ta.service.MesinRestService;
 import apap.ta.service.PegawaiServiceImpl;
-
+import apap.ta.service.ProduksiService;
 import apap.ta.service.RequestUpdateItemRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -52,7 +52,10 @@ public class ItemController {
     private RequestUpdateItemRestService ruirs;
 
     @Autowired
-    private MesinDb mesinDb;
+    private MesinRestService mesinService;
+
+    @Autowired
+    private ProduksiService produksiService;
 
     @GetMapping("/list-item")
     private String getListItem(Model model) {
@@ -113,7 +116,7 @@ public class ItemController {
         int add_stok = 0;
         String kat = idet.getKategori();
         Long idkat = getIdKategori(kat);
-        List<MesinModel> mesinList = mesinDb.findAllByidKategori(idkat);
+        List<MesinModel> mesinList = mesinService.retrieveListMesinByKategori(idkat);
         MesinModel pilihan = new MesinModel();
         String rolePegawai = auth.getAuthorities().toArray()[0].toString();
 
@@ -127,38 +130,40 @@ public class ItemController {
     }
 
     @PostMapping(value = "/item/update")
-    public String updateItemSubmit(@ModelAttribute ItemDetail item, 
-                                    @ModelAttribute int stok, 
-                                    @ModelAttribute MesinModel mesin) {
-        int total_stok = item.getStok() + stok;
-        item.setStok(total_stok);
-        ItemDetail updated = itemRestService.updateItem(item);
-        ProduksiModel prod = new ProduksiModel();
-        Long idkat = getIdKategori(item.getKategori());
-        Date dt = new Date();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        PegawaiModel pegawai = pegawaiService.getPegawai(auth.getName());
-        prod.setIdItem(updated.getUuid());
-        prod.setIdKategori(idkat);
-        prod.setMesin(mesin);
-        prod.setRequestUpdateItem(null);
-        prod.setPegawai(pegawai);
-        prod.setTambahanStok(stok);
-        prod.setTanggalProduksi(dt);
+    public String updateItemSubmit(String item, Integer tambahan_stok, Long pilmesin, Model model) {
+        ItemDetail idet = itemRestService.getItem(item);
+        MesinModel mesin = mesinService.getMesinById(pilmesin);
+        int total_stok = idet.getStok() + tambahan_stok;
+        idet.setStok(total_stok);
+        ItemDetail updated = itemRestService.updateItem(idet);
+            ProduksiModel prod = new ProduksiModel();
+            Long idkat = getIdKategori(idet.getKategori());
+            Date dt = new Date();
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            PegawaiModel pegawai = pegawaiService.getPegawai(auth.getName());
+            prod.setIdItem(updated.getUuid());
+            prod.setIdKategori(idkat);
+            prod.setMesin(mesin);
+            prod.setPegawai(pegawai);
+            prod.setTambahanStok(tambahan_stok);
+            prod.setTanggalProduksi(dt);
+            produksiService.createProduksi(prod);
 
-        int capMesin = mesin.getKapasitas() - 1;
-        mesin.setKapasitas(capMesin);
+            mesinService.updateMesin(mesin);
 
-        int ctr = pegawai.getCounter() + 1;
-        pegawai.setCounter(ctr);
-        return "update-berhasil";
+            pegawaiService.addCounter(pegawai);
+
+            model.addAttribute("nmitem", updated.getNama());
+            model.addAttribute("stok", tambahan_stok);
+            model.addAttribute("nmmesin", mesin.getNamaMesin());
+            return "update-berhasil";
     }
 
     @GetMapping(value="request/update/{id}")
     private String updateItemByRequest(@PathVariable Long id, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         RequestUpdateItemModel rui = ruirs.getRequestById(id);
-        List<MesinModel> mesinList = mesinDb.findAllByidKategori(rui.getIdKategori());
+        List<MesinModel> mesinList = mesinService.retrieveListMesinByKategori(rui.getIdKategori());
         MesinModel pilihan = new MesinModel();
         String rolePegawai = auth.getAuthorities().toArray()[0].toString();
 
