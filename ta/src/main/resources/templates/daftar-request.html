@@ -38,7 +38,7 @@
                         <td th:text="${request.idCabang}"></td>
                         <td th:text="${request.tambahanStok}"></td>
                         <td th:text="${request.tanggalRequest}"></td>
-                        <td th:if="${request.executed == true}">
+                        <td th:if="${request.executed == true && role == 'STAFF_OPERASIONAL'}">
                             <a class="btn btn-sm btn-primary" th:href="@{/delivery/add/} + ${request.idRequestUpdateItem} + '/' + ${request.idCabang} ">Buat Delivery</a>
                         </td>
                         <td th:if="${request.executed == false}">

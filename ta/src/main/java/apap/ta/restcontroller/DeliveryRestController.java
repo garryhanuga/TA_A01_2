@@ -52,11 +52,11 @@ public class DeliveryRestController {
             LinkedHashMap<String, Object> firstHash = (LinkedHashMap<String, Object>) listCabangRest.get(i);
             String id_cabang = String.valueOf(firstHash.get("id"));
             Long id = Long.parseLong(id_cabang);
-            String namaCabang = String.valueOf(firstHash.get("nama"));
+//            String namaCabang = String.valueOf(firstHash.get("nama"));
             String alamatCabang = String.valueOf(firstHash.get("alamat"));
 
             deliveryDetail.setIdCabang(id);
-            deliveryDetail.setNamaCabang(namaCabang);
+//            deliveryDetail.setNamaCabang(namaCabang);
             deliveryDetail.setAlamatCabang(alamatCabang);
 
             cabangDelivery.add(deliveryDetail);
