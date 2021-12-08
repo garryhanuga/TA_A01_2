@@ -38,11 +38,12 @@
                             <td th:text="${delivery.tanggalDibuat}"></td>
                             <td th:text="${delivery.tanggalDikirim}"></td>
                             <td th:text="${delivery.RequestUpdateItem.idRequestUpdateItem}"></td>
-                            <td th:if="${delivery.sent == false}">
+                            <td th:if="${delivery.sent == false && nama == delivery.pegawai.idPegawai}">
                                 <a class="btn btn-sm btn-primary"
                                    style="background-color: white;width: 8rem; padding: 2px; margin: 0px; border-radius:10px;"
                                    th:href="@{/api/v2/list-cabang/} + ${delivery.idDelivery} + '/' + ${delivery.idCabang}">Kirim</a>
                             </td>
+                            <td th:if="${delivery.sent == false && role == 'STAFF_OPERASIONAL'}">Perlu Dikirim</td>
                             <td th:if="${delivery.sent == true}"> Terkirim </td>
 <!--                        </div>-->
                     </tr>
