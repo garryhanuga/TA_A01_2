@@ -49,6 +49,11 @@ public class RequestUpdateItemRestServiceImpl implements RequestUpdateItemRestSe
         return null;
     }
 
+    @Override
+    public RequestUpdateItemModel updateRequestUpdateItem(RequestUpdateItemModel requestUpdateItem) {
+        return requestUpdateItemDb.save(requestUpdateItem);
+    }
+
     public RequestUpdateItemRestServiceImpl(WebClient.Builder webClientBuilder){
         this.webClient = webClientBuilder.baseUrl(Setting.requestUpdateItemUrl).build();
     }

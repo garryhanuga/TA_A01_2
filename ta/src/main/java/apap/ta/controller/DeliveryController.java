@@ -37,6 +37,12 @@ public class DeliveryController {
             @PathVariable Long idCabang,
             Model model
     ) {
+        RequestUpdateItemModel requestUpdateItemModel = requestUpdateItemRestService.getRequestItemModelByIdRequestItemModel(idRequestUpdateItem);
+        if(requestUpdateItemModel.getDelivery()!=null){
+            Long id = requestUpdateItemModel.getIdRequestUpdateItem();
+            model.addAttribute("id", id);
+            return "error-delivery";
+        }
         DeliveryModel delivery = new DeliveryModel();
         List<PegawaiModel> listPegawai =  pegawaiService.getPegawaiList();
         List<PegawaiModel> listKurir = new ArrayList<>();
@@ -75,6 +81,9 @@ public class DeliveryController {
         delivery.setPegawai(kurir);
         delivery.setSent(false);
         deliveryRestService.addDelivery(delivery);
+        requestUpdateItem.setDelivery(delivery);
+        requestUpdateItemRestService.updateRequestUpdateItem(requestUpdateItem);
+        System.out.println("delivery request " + requestUpdateItem.getDelivery().getIdDelivery());
         model.addAttribute("delivery", delivery);
         return "add-delivery";
     }

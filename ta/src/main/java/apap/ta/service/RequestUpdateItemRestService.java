@@ -9,5 +9,7 @@ public interface RequestUpdateItemRestService {
     RequestUpdateItemModel createRequestUpdateItem(RequestUpdateItemDetail requestUpdateItem);
     List<RequestUpdateItemModel> retrieveListRequestUpdateItem();
     RequestUpdateItemModel getRequestItemModelByIdRequestItemModel(Long id);
+    RequestUpdateItemModel updateRequestUpdateItem(RequestUpdateItemModel requestUpdateItem);
+
 
 }
