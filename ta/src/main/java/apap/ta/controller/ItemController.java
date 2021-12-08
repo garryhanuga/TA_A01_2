@@ -81,5 +81,6 @@ public class ItemController {
         String rolePegawai = auth.getAuthorities().toArray()[0].toString();
         model.addAttribute("role", rolePegawai);
         return "detail-item";
+
     }
 }
