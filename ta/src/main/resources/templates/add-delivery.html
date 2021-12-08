@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <title>SI-FACTORY : Delivery berhasil ditambahkan</title>
+    <meta charset="UTF-8">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('')"></nav>
+<div class="card m-4 p-4">
+    <div class="card-header bg-danger">
+        <h3 style="text-align:center; font-weight:bold; color:white">Delivery Detail</h3>
+    </div>
+    <div class="card-body">
+        <div class="justify-content-center">
+            <br>
+            <h3 th:text="'Kurir ' + ${delivery.pegawai.namaPegawai} + ' berhasil ditugaskan untuk delivery '" style="text-align:center"></h3>
+            <br>
+        </div>
+    </div>
+    <div class="card" style="background-color: white;width: 8rem; padding: 0px; margin: 0px; border-radius:10px; border-color:transparent">
+        <a class="mx-2 btn btn-dark" style="color: rgb(255, 91, 91)" href="/list-delivery">Kembali</a>
+    </div>
+</div>
+</body>
+</html>

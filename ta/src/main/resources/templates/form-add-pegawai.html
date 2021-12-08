@@ -16,7 +16,7 @@
             <div class="justify-content-center">
                 <h2>Tambah Pegawai Baru</h2>
                 <br>
-                <form th:action="@{/pegawai/add}" th:object="${pegawai}" method="POST">
+                <form th:action="@{/pegawai/add}" th:object="${pegawai}" method="POST" onSubmit="return confirm('Do you want to submit?')">
                     <label>Username</label>
                     <input type="text" name="username" class="form-control"/>
 
