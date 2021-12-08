@@ -47,6 +47,34 @@
             </table>
         </div>
     </div>
+    <div class="card border-0 mb-5 rounded" >
+        <h3 class="card-header bg-white border-0 text-center"style=" color: grey">Riwayat Produksi Item</h3>
+        <div class="card-body">
+            <table class="table">
+                <thead style="color:grey">
+                <tr>
+                    <th>No</th>
+                    <th>Nama Kategori</th>
+                    <th>Tambahan Stok</th>
+                    <th>Tanggal Produksi</th>
+                    <th>Nama Mesin</th>
+                    <th>Nama Pegawai</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="produksi, iterationStatus : ${listProduksi}"
+                    th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                    <td th:text="${iterationStatus.count}"></td>
+                    <td th:text="${kategori}"></td>
+                    <td th:text="${produksi.tambahanStok}"></td>
+                    <td th:text="${produksi.tanggalProduksi}"></td>
+                    <td th:text="${produksi.mesin.namaMesin}"></td>
+                    <td th:text="${produksi.pegawai.namaPegawai}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <div class="card align-items-center" style="background-color: white;width: 100%; padding: 0px; margin: 0px; border-radius:10px; border-color:transparent">
         <a class="btn btn-dark" href="/">Kembali</a>
     </div>

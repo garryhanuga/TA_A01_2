@@ -8,4 +8,5 @@ public interface ProduksiService {
     ProduksiModel createProduksi(ProduksiModel produksi);
     List<ProduksiModel> retrieveListProduksi();
     ProduksiModel getProduksiByIdProduksi(Long id);
+    List<ProduksiModel> filterProduksiByItem(String uuid);
 }
