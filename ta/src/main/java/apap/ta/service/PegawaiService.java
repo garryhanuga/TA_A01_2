@@ -9,6 +9,7 @@ public interface PegawaiService {
     PegawaiModel getPegawai(String username);
     List<PegawaiModel> getPegawaiList();
     PegawaiModel updatePegawai(PegawaiModel pegawai);
+    void addCounter(PegawaiModel pegawai);
 
 
     List<Integer> getListGajiTiapPegawai();
