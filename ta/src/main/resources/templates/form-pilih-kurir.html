@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-
 <head>
     <title>SI-FACTORY : Daftar Kurir</title>
     <meta charset="UTF-8">
@@ -13,10 +12,13 @@
     <div class="card-header bg-danger">
         <h3 style="text-align:center; font-weight:bold; color:white;">Pilih Kurir</h3>
     </div>
+    <form th:action="@{/delivery/add/} + ${idRequestUpdateItem} + '/' + ${idCabang} " th:object="${delivery}" method="POST" onSubmit="return confirm('Do you want to submit?')">
     <div class="card-body">
+<!--        <input type="hidden" th:field="*{idCabang}" />-->
+<!--        <input type="hidden" th:field="*{RequestUpdateItem}" />-->
         <div class="justify-content-center">
             <label>Daftar Kurir</label>
-            <Select name="kurir" class="form-control">
+            <Select name="pegawai" class="form-control">
                 <option selected value="">Pilih Kurir</option>
                 <option th:each="kurir: ${listKurir}"
                         th:value="${kurir.idPegawai}"
@@ -25,7 +27,8 @@
             </Select>
         </div>
     </div>
-<button class="btn btn-primary" type="submit" name="submit">Submit</button>
+    <button class="btn btn-primary" type="submit" name="submit" >Submit</button>
+    </form>
 </div>
 </body>
 </html>

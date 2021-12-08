@@ -38,15 +38,11 @@ public class DeliveryController {
             Model model
     ) {
         DeliveryModel delivery = new DeliveryModel();
-        RequestUpdateItemModel requestUpdateItem = requestUpdateItemRestService.getRequestItemModelByIdRequestItemModel(idRequestUpdateItem);
-        delivery.setRequestUpdateItem(requestUpdateItem);
-        delivery.setIdCabang(idCabang);
         List<PegawaiModel> listPegawai =  pegawaiService.getPegawaiList();
         List<PegawaiModel> listKurir = new ArrayList<>();
         for(PegawaiModel pegawai : listPegawai){
             if(pegawai.getRole().getNamaRole().equals("STAFF_KURIR")){
                 listKurir.add(pegawai);
-                System.out.println(pegawai.getIdPegawai());
             }
         }
         model.addAttribute("listKurir", listKurir);
@@ -54,23 +50,33 @@ public class DeliveryController {
         return "form-pilih-kurir";
     }
 
-    @PostMapping(value="/delivery/add/{usernameKurir}")
+    @PostMapping(value="/delivery/add/{idRequestUpdateItem}/{idCabang}")
     private String assignDeliverySubmit(
-            @PathVariable String usernameKurir,
+            @PathVariable Long idRequestUpdateItem,
+            @PathVariable Long idCabang,
             @ModelAttribute DeliveryModel delivery,
             Model model
     ) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        PegawaiModel staff_op = pegawaiService.getPegawai(auth.getName());
+        RequestUpdateItemModel requestUpdateItem = requestUpdateItemRestService.getRequestItemModelByIdRequestItemModel(idRequestUpdateItem);
+        PegawaiModel kurir = pegawaiService.getPegawai(delivery.getPegawai().getUsername());
+        int counter = staff_op.getCounter();
+        counter+=1;
+        delivery.setRequestUpdateItem(requestUpdateItem);
+        delivery.setIdCabang(idCabang);
         java.util.Date date = new java.util.Date();
         Date tgl_sekarang = new Date(date.getTime());
         delivery.setTanggalDibuat(tgl_sekarang);
         delivery.setTanggalDikirim(tgl_sekarang);
         // set tanggal dikirim sementara tgl skrg dulu
-        PegawaiModel kurir = pegawaiService.getPegawai(usernameKurir);
-        kurir.setCounter(kurir.getCounter()+1);
+        staff_op.setCounter(counter);
+        pegawaiService.updatePegawai(staff_op);
         delivery.setPegawai(kurir);
         delivery.setSent(false);
         deliveryRestService.addDelivery(delivery);
-        return "home";
+        model.addAttribute("delivery", delivery);
+        return "add-delivery";
     }
 
     @GetMapping("/list-delivery")

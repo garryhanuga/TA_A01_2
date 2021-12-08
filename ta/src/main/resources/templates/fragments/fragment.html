@@ -19,6 +19,7 @@
         ></script>
         <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
         <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/handleForm.js}"></script>
     </head>
 </head>
 <body>
@@ -42,16 +43,16 @@
             <li th:if="${role == 'ADMIN' || role == 'FACTORY_MANAGER'}" th:classappend="${page == 'Pegawai'} ? active : ''" class="nav-item">
                 <a class="nav-link" href="/pegawai/list-pegawai" style="color: #3B3B3B; font-weight: bold">Pegawai</a>
             </li>
-            <li th:if="${role == 'STAFF_GUDANG'}" th:classappend="${page == 'Rui'} ? active : ''" class="nav-item">
+            <li th:if="${role == 'STAFF_GUDANG' || role == 'STAFF_OPERASIONAL'}" th:classappend="${page == 'Rui'} ? active : ''" class="nav-item">
                 <a class="nav-link" th:href="@{/list-request-update-item}" style="color: #3B3B3B; font-weight: bold">RUI</a>
             </li>
-            <li th:if="${role == 'STAFF_OPERASIONAL'}" th:classappend="${page == 'Pegawai'} ? active : ''" class="nav-item">
-                <a class="nav-link" th:href="@{/list-request-update-item}" style="color: #3B3B3B; font-weight: bold">Pegawai</a>
-            </li>
+<!--            <li th:if="${role == 'STAFF_OPERASIONAL'}" th:classappend="${page == 'Pegawai'} ? active : ''" class="nav-item">-->
+<!--                <a class="nav-link" th:href="@{/list-request-update-item}" style="color: #3B3B3B; font-weight: bold">Pegawai</a>-->
+<!--            </li>-->
             <li th:classappend="${page == 'Item'} ? active : ''" class="nav-item">
                 <a class="nav-link" href="/list-item" style="color: #3B3B3B; font-weight: bold">Item</a>
             </li>
-            <li th:classappend="${page == 'Delivery'} ? active : ''" class="nav-item">
+            <li th:if="${role == 'STAFF_KURIR' || role == 'STAFF_OPERASIONAL'}" th:classappend="${page == 'Delivery'} ? active : ''" class="nav-item">
                 <a class="nav-link" href="/list-delivery" style="color: #3B3B3B; font-weight: bold">Delivery</a>
             </li>
             <li th:classappend="${page == 'Produksi'} ? active : ''" class="nav-item">
