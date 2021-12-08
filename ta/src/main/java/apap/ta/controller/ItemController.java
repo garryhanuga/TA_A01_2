@@ -64,31 +64,20 @@ public class ItemController {
         return "daftar-request";
     }
 
-    @GetMapping(value="/item/{uuid}")
+    @GetMapping(value="/item/{uuid}/{nama}/{kategori}/{stok}/{harga}")
     private String detailItem(
         @PathVariable ("uuid") String uuid,
+        @PathVariable ("nama") String nama,
+        @PathVariable ("kategori") String kategori,
+        @PathVariable ("stok") String stok,
+        @PathVariable ("harga") String harga,
         Model model){
-        System.out.println("masuk sini");
-        System.out.println("masuk sini");
-        System.out.println("masuk sini");
-        System.out.println("masuk sini");
-        Mono<ItemDetail> detailItemApi = itemRestService.getItem(uuid);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        ItemDetail itemDetail = new ItemDetail();
-        itemDetail.setMessage(detailItemApi.block().getMessage());
-        itemDetail.setStatus(detailItemApi.block().getStatus());
-        itemDetail.setResult(detailItemApi.block().getResult());
-        itemDetail.getResult().setUuid(detailItemApi.block().getResult().getUUID());
-        itemDetail.getResult().setNama(detailItemApi.block().getResult().getNama());
-        itemDetail.getResult().setStok(detailItemApi.block().getResult().getStok());
-        itemDetail.getResult().setKategori(detailItemApi.block().getResult().getKategori());
-        itemDetail.getResult().setHarga(detailItemApi.block().getResult().getHarga());
-        
-        model.addAttribute("uuid",itemDetail.getResult().getUUID());
-        model.addAttribute("nama",itemDetail.getResult().getNama());
-        model.addAttribute("stok",itemDetail.getResult().getStok());
-        model.addAttribute("kategori",itemDetail.getResult().getKategori());
-        model.addAttribute("harga",itemDetail.getResult().getHarga());
+        model.addAttribute("uuid",uuid);
+        model.addAttribute("nama",nama);
+        model.addAttribute("stok",stok);
+        model.addAttribute("kategori",kategori);
+        model.addAttribute("harga",harga);
         String rolePegawai = auth.getAuthorities().toArray()[0].toString();
         model.addAttribute("role", rolePegawai);
         return "detail-item";
