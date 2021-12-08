@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tambah pegawai</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment"></nav>
+
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div th:if="${role == 'STAFF_GUDANG'}" class="justify-content-center">
+                <h2>Update Stok Item</h2>
+                <br>
+                <form th:action="@{/item/update}" method="POST">
+                    <input type="hidden" name="item" id="item" th:value="${item}" />
+                    <label>Tambahan Stok</label>
+                    <div th:if="${tambahan_stok == 0}">
+                        <input type="text" th:value="${tambahan_stok}" id="tambahan_stok" name="tambahan_stok" class="form-control"/>   
+                    </div>
+                    <div th:unless="${tambahan_stok == 0}">
+                        <input type="text" th:value="${tambahan_stok}" id="tambahan_stok" name="tambahan_stok" class="form-control" th:readonly="true" />   
+                    </div>
+                    <label>Mesin</label>
+                    <Select name="pilmesin" id="pilmesin" class="form-control">
+                        <option selected value="">--Pilih Mesin--</option>
+                        <option th:each="mesin: ${mesinList}"
+                                th:value="${mesin.idMesin}"
+                                th:text="${mesin.namaMesin}" >
+                        </option>
+                    </Select>
+                    <br>
+                    <br>
+                    <button type="submit" name="save" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-link" href="/">Home</a>
+                </form>
+            </div>
+
+            <div th:unless="${role == 'STAFF_GUDANG'}" class="justify-content-center">
+                <h2>Anda tidak berhak mengakses halaman ini.</h2>
+                <p>Allowed role: STAFF_GUDANG</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
