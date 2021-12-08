@@ -1,7 +1,7 @@
 package apap.ta.service;
 
 import apap.ta.rest.ItemDetail;
-import apap.ta.rest.ListDetail;
+import apap.ta.rest.ListItemDetail;
 import apap.ta.rest.Setting;
 import apap.ta.model.ItemModel;
 
@@ -26,10 +26,10 @@ public class ItemRestServiceImpl implements ItemRestService{
     }
 
     @Override
-    public Mono<ListDetail> getListItem() {
+    public Mono<ListItemDetail> getListItem() {
         return this.webClient.get()
                 .retrieve()
-                .bodyToMono(ListDetail.class);
+                .bodyToMono(ListItemDetail.class);
     }
 
     @Override
@@ -49,4 +49,5 @@ public class ItemRestServiceImpl implements ItemRestService{
             .retrieve().bodyToMono(ItemDetail.class).block();
             return obj;
     }
+
 }

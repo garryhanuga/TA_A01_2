@@ -7,7 +7,7 @@ import apap.ta.model.ProduksiModel;
 import apap.ta.model.RequestUpdateItemModel;
 import apap.ta.repository.MesinDb;
 import apap.ta.rest.ItemDetail;
-import apap.ta.rest.ListDetail;
+import apap.ta.rest.ListItemDetail;
 import apap.ta.service.ItemRestService;
 import apap.ta.service.PegawaiServiceImpl;
 
@@ -17,6 +17,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,11 +27,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import reactor.core.publisher.Mono;
 
 import java.util.Date;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import reactor.core.publisher.Mono;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class ItemController {
@@ -47,9 +56,9 @@ public class ItemController {
 
     @GetMapping("/list-item")
     private String getListItem(Model model) {
-        Mono<ListDetail> itemapi = itemRestService.getListItem();
+        Mono<ListItemDetail> itemapi = itemRestService.getListItem();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        ListDetail items = new ListDetail();
+        ListItemDetail items = new ListItemDetail();
         items.setMessage(itemapi.block().getMessage());
         items.setStatus(itemapi.block().getStatus());
         items.setResult(itemapi.block().getResult());
@@ -163,4 +172,22 @@ public class ItemController {
     }
     
 
+    @GetMapping(value="/item/{uuid}/{nama}/{kategori}/{stok}/{harga}")
+    private String detailItem(
+        @PathVariable ("uuid") String uuid,
+        @PathVariable ("nama") String nama,
+        @PathVariable ("kategori") String kategori,
+        @PathVariable ("stok") String stok,
+        @PathVariable ("harga") String harga,
+        Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("uuid",uuid);
+        model.addAttribute("nama",nama);
+        model.addAttribute("stok",stok);
+        model.addAttribute("kategori",kategori);
+        model.addAttribute("harga",harga);
+        String rolePegawai = auth.getAuthorities().toArray()[0].toString();
+        model.addAttribute("role", rolePegawai);
+        return "detail-item";
+    }
 }

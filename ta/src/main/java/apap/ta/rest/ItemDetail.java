@@ -13,6 +13,7 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ItemDetail {
     private int status;
+
     private String message;
     private String uuid;
     private String nama;

@@ -12,14 +12,13 @@
 
 <nav th:replace="fragments/fragment :: navbar('')"></nav>
 <div class="container">
-    <br>
-    <h2>Daftar Seluruh Request Update request</h2>
-    <br>
     <div class="card-body">
         <div class="justify-content-center">
             <div th:if="*{listUpdate.size() != 0}">
+                <h2 class="text-center" style="font-weight:bold; color:#3B3B3B">Daftar Seluruh Request Update request</h2>
+                <br>
                 <table class="table">
-                    <thead>
+                    <thead style="background-color: rgb(255, 91, 91); color:white">
                     <tr>
                         <th>No</th>
                         <th>ID Item</th>
@@ -27,6 +26,7 @@
                         <th>Cabang</th>
                         <th>Tambahan Stok</th>
                         <th>Tanggal</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,6 +38,12 @@
                         <td th:text="${request.idCabang}"></td>
                         <td th:text="${request.tambahanStok}"></td>
                         <td th:text="${request.tanggalRequest}"></td>
+                        <td th:if="${request.executed == true}">
+                            <a class="btn btn-sm btn-primary" th:href="@{/delivery/add/} + ${request.idRequestUpdateItem} + '/' + ${request.idCabang} ">Buat Delivery</a>
+                        </td>
+                        <td th:if="${request.executed == false}">
+                            <a class="btn btn-sm btn-primary" th:href="@{/delivery/update/}">Update</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -46,9 +52,11 @@
                 <h2 th:text="'Belum Ada Request Update request'"></h2>
             </div>
         </div>
+        <div class="card align-items-center" style="background-color: white;width: 100%; padding: 0px; margin: 0px; border-radius:10px; border-color:transparent">
+            <a class="mx-2 btn btn-dark" style="color: rgb(255, 91, 91)" href="/">Home</a>
+        </div>
     </div>
     <br>
-    <a class="btn btn-primary" href="/">Home</a>
 </div>
 </body>
 </html>

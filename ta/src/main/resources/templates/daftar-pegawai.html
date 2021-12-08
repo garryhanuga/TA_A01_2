@@ -14,12 +14,12 @@
 <div class="container">
     <br>
     <div class="card-body">
-        <h2 class="text-center">Daftar Seluruh Pegawai Si Factory</h2>
-        <br>
         <div class="justify-content-center">
             <div th:if="*{listPegawai.size() != 0}">
+                <h2 class="text-center" style="font-weight:bold; color:#3B3B3B">Daftar Seluruh Pegawai Si Factory</h2>
+                <br>
                 <table class="table">
-                    <thead>
+                    <thead style="background-color: rgb(255, 91, 91); color:white">
                     <tr>
                         <th>No</th>
                         <th>Nama Pegawai</th>
@@ -42,10 +42,11 @@
                 <h2 th:text="'Tidak ada Pegawai'"></h2>
             </div>
         </div>
+        <div class="card align-items-center" style="background-color: white;width: 100%; padding: 0px; margin: 0px; border-radius:10px; border-color:transparent">
+            <a class="btn btn-dark" href="/">Kembali</a>
+        </div>
     </div>
     <br>
-    <a class="btn btn-primary" href="/">Home</a>
 </div>
-
 </body>
 </html>

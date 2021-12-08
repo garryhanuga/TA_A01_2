@@ -32,9 +32,7 @@ public class PegawaiController {
         List<PegawaiModel> listPegawai = pegawaiService.getPegawaiList();
         List<Integer> listGajiTiapPegawai = pegawaiService.getListGajiTiapPegawai();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(auth.getAuthorities());
         String rolePegawai = auth.getAuthorities().toArray()[0].toString();
-        System.out.println(rolePegawai);
         model.addAttribute("role", rolePegawai);
         model.addAttribute("listPegawai", listPegawai);
         model.addAttribute("listGajiTiapPegawai", listGajiTiapPegawai);
@@ -43,6 +41,9 @@ public class PegawaiController {
 
     @GetMapping(value = "/add")
     private String addPegawaiFormPage(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        PegawaiModel peg = pegawaiService.getPegawai(auth.getName());
+        model.addAttribute("role", peg.getRole().getNamaRole());
         PegawaiModel pegawai = new PegawaiModel();
         List<RoleModel> listRole = roleService.findAll();
         model.addAttribute("pegawai", pegawai);
@@ -52,16 +53,19 @@ public class PegawaiController {
 
     @PostMapping(value = "/add")
     private String addPegawaiSubmit(@ModelAttribute PegawaiModel pegawai, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        PegawaiModel peg = pegawaiService.getPegawai(auth.getName());
+        model.addAttribute("role", peg.getRole().getNamaRole());
         model.addAttribute("listRole", roleService.findAll());
-        model.addAttribute("username", pegawai.getUsername());
+        model.addAttribute("namaPegawai", peg.getNamaPegawai());
         List<PegawaiModel> listPegawai = pegawaiService.getPegawaiList();
         for(int i =0 ; i<listPegawai.size(); i++){
             if(listPegawai.get(i).getUsername().equals(pegawai.getUsername())){
                 return "error-add-pegawai";
             }
         }
-        pegawaiService.addPegawai(pegawai);
         pegawai.setCounter(0);
-        return "home";
+        pegawaiService.addPegawai(pegawai);
+        return "add-pegawai";
     }
 }

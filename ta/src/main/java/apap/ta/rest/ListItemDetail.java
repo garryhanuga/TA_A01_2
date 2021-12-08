@@ -13,7 +13,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 @Data
-public class ListDetail {
+public class ListItemDetail {
     private int status;
     private String message;
     private List<Object> result;

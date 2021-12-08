@@ -22,8 +22,8 @@
     </head>
 </head>
 <body>
-<nav th:fragment="navbar(page)" class="navbar navbar-expand-lg navbar-light bg-danger">
-    <a class="navbar-brand font-weight-bold text-light" href="/">SI-FACTORY</a>
+<nav th:fragment="navbar(page)" class="navbar navbar-expand-lg navbar-light bg-danger shadow p-3 mb-5 bg-white rounded">
+    <a class="navbar-brand font-weight-bold text-danger" href="/">SI-FACTORY</a>
     <button
             class="navbar-toggler"
             type="button"
@@ -39,26 +39,23 @@
             <li th:classappend="${page == 'Login'} ? active : ''" class="nav-item">
 
             </li>
-            <li th:if="${role == 'ADMIN'}" th:classappend="${page == 'Pegawai'} ? active : ''" class="nav-item">
-                <a class="nav-link" href="/pegawai/list-pegawai" style="color: white; font-weight: bold">Pegawai</a>
-            </li>
-            <li th:if="${role == 'FACTORY_MANAGER'}" th:classappend="${page == 'Rui'} ? active : ''" class="nav-item">
-                <a class="nav-link" th:href="@{/list-request-update-item}" style="color: white; font-weight: bold">RUI</a>
+            <li th:if="${role == 'ADMIN' || role == 'FACTORY_MANAGER'}" th:classappend="${page == 'Pegawai'} ? active : ''" class="nav-item">
+                <a class="nav-link" href="/pegawai/list-pegawai" style="color: #3B3B3B; font-weight: bold">Pegawai</a>
             </li>
             <li th:if="${role == 'STAFF_GUDANG'}" th:classappend="${page == 'Rui'} ? active : ''" class="nav-item">
-                <a class="nav-link" th:href="@{/list-request-update-item}" style="color: white; font-weight: bold">RUI</a>
+                <a class="nav-link" th:href="@{/list-request-update-item}" style="color: #3B3B3B; font-weight: bold">RUI</a>
             </li>
             <li th:if="${role == 'STAFF_OPERASIONAL'}" th:classappend="${page == 'Pegawai'} ? active : ''" class="nav-item">
-                <a class="nav-link" href="/pegawai/list-pegawai" style="color: white; font-weight: bold">Pegawai</a>
+                <a class="nav-link" th:href="@{/list-request-update-item}" style="color: #3B3B3B; font-weight: bold">Pegawai</a>
             </li>
             <li th:classappend="${page == 'Item'} ? active : ''" class="nav-item">
-                <a class="nav-link" href="/list-item" style="color: white; font-weight: bold">Item</a>
+                <a class="nav-link" href="/list-item" style="color: #3B3B3B; font-weight: bold">Item</a>
             </li>
             <li th:classappend="${page == 'Delivery'} ? active : ''" class="nav-item">
-                <a class="nav-link" href="/" style="color: white; font-weight: bold">Delivery</a>
+                <a class="nav-link" href="/list-delivery" style="color: #3B3B3B; font-weight: bold">Delivery</a>
             </li>
-            <li th:classappend="${page == 'Mesin'} ? active : ''" class="nav-item">
-                <a class="nav-link" href="/" style="color: white; font-weight: bold">Mesin</a>
+            <li th:classappend="${page == 'Produksi'} ? active : ''" class="nav-item">
+                <a class="nav-link" href="/produksi/list-produksi" style="color: #3B3B3B; font-weight: bold">Produksi</a>
             </li>
 <!--            <li th:classappend="${page == 'Cabang'} ? active : ''" class="nav-item">-->
 <!--                <a class="nav-link" href="/cabang/viewall">Cabang</a>-->
@@ -76,11 +73,11 @@
     </div>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" th:text="${role}"></a>
+            <li class="nav-item align-self-center">
+                <a class="text-bold" th:text="${role}" style="color: #3B3B3B; font-weight: bold; padding:10px;margin:0;width: 100px;border-color:transparent;"></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/logout}">Logout</a>
+            <li class="nav-item align-self-center">
+                <a class="btn" th:href="@{/logout}" style=" margin:0;width: 100px;border-width : 1px;border-color:rgb(255, 128, 128);">Logout</a>
             </li>
         </ul>
     </div>

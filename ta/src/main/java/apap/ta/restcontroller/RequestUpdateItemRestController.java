@@ -20,7 +20,7 @@ public class RequestUpdateItemRestController {
     @Autowired
     private RequestUpdateItemRestService requestUpdateItemRestService;
 
-    @PostMapping(value="/requestupdateitem",consumes = "application/json",produces = "application/json")
+    @PostMapping(value="/requestupdateitem")
     private RequestUpdateItemModel createRequestUpdateItem(
             @Valid @RequestBody RequestUpdateItemDetail requestUpdateItem,
             BindingResult bindingResult){
