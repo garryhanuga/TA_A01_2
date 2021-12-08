@@ -12,8 +12,8 @@ public class DeliveryDetail {
     @JsonProperty("idCabang")
     private Long idCabang;
 
-    @JsonProperty("namaCabang")
-    private String namaCabang;
+//    @JsonProperty("namaCabang")
+//    private String namaCabang;
 
     @JsonProperty("alamatCabang")
     private String alamatCabang;
