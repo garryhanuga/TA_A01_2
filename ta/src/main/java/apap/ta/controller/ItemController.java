@@ -54,15 +54,19 @@ public class ItemController {
         model.addAttribute("listItem", itemapi.block().getResult());
         String rolePegawai = auth.getAuthorities().toArray()[0].toString();
         model.addAttribute("role", rolePegawai);
+
         return "daftar-item";
     }
 
     @GetMapping("/list-request-update-item")
     private String getListRequestUpdateItem(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         List<RequestUpdateItemModel> listUpdate = ruirs.retrieveListRequestUpdateItem();
         System.out.print("LIATNIHIH WOI");
         System.out.print(listUpdate);
+        String rolePegawai = auth.getAuthorities().toArray()[0].toString();
         model.addAttribute("listUpdate", listUpdate);
+        model.addAttribute("role", rolePegawai);
         return "daftar-request";
     }
 
