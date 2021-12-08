@@ -19,7 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/v2")
+@RequestMapping("/api/v1")
 public class DeliveryRestController {
     @Autowired
     private DeliveryRestService deliveryRestService;
@@ -35,7 +35,7 @@ public class DeliveryRestController {
 //        return deliveryRestService.getListCabang();
 //    }
 
-    @GetMapping("/list-cabang/{idDelivery}/{idCabang}")
+    @GetMapping("/daftar-alamat-cabang/{idDelivery}/{idCabang}")
     private String getCabang(
             @PathVariable Long idDelivery,
             @PathVariable Long idCabang,
