@@ -57,10 +57,11 @@ public class DeliveryController {
             @ModelAttribute DeliveryModel delivery,
             Model model
     ) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        PegawaiModel staff_op = pegawaiService.getPegawai(auth.getName());
         RequestUpdateItemModel requestUpdateItem = requestUpdateItemRestService.getRequestItemModelByIdRequestItemModel(idRequestUpdateItem);
         PegawaiModel kurir = pegawaiService.getPegawai(delivery.getPegawai().getUsername());
-        System.out.println(kurir);
-        int counter = kurir.getCounter();
+        int counter = staff_op.getCounter();
         counter+=1;
         delivery.setRequestUpdateItem(requestUpdateItem);
         delivery.setIdCabang(idCabang);
@@ -69,7 +70,8 @@ public class DeliveryController {
         delivery.setTanggalDibuat(tgl_sekarang);
         delivery.setTanggalDikirim(tgl_sekarang);
         // set tanggal dikirim sementara tgl skrg dulu
-        kurir.setCounter(counter);
+        staff_op.setCounter(counter);
+        pegawaiService.updatePegawai(staff_op);
         delivery.setPegawai(kurir);
         delivery.setSent(false);
         deliveryRestService.addDelivery(delivery);
