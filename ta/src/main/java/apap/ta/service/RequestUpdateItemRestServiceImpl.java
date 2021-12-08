@@ -20,6 +20,10 @@ public class RequestUpdateItemRestServiceImpl implements RequestUpdateItemRestSe
     @Autowired
     private RequestUpdateItemDb requestUpdateItemDb;
 
+    @Override
+    public RequestUpdateItemModel getRequestById(Long id) {
+        return requestUpdateItemDb.getById(id);
+    }
 
     @Override
     public RequestUpdateItemModel createRequestUpdateItem(RequestUpdateItemDetail requestUpdateItem) {
@@ -42,4 +46,5 @@ public class RequestUpdateItemRestServiceImpl implements RequestUpdateItemRestSe
     public RequestUpdateItemRestServiceImpl(WebClient.Builder webClientBuilder){
         this.webClient = webClientBuilder.baseUrl(Setting.requestUpdateItemUrl).build();
     }
+
 }

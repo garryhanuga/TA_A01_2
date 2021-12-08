@@ -28,6 +28,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class ItemController {
@@ -95,16 +97,19 @@ public class ItemController {
         return Long.valueOf(0);
     }
 
-    @PostMapping(value = "/item/update", params = {"form"})
-    private String updateItem(@ModelAttribute ItemModel item, Model model) {
+    @GetMapping(value = "/item/update/{uuid}")
+    private String updateItem(@PathVariable String uuid, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        ItemDetail idet = itemRestService.getItem(uuid);
         int add_stok = 0;
-        String kat = item.getKategori();
-        List<MesinModel> mesinList = mesinDb.findAll();
-        MesinModel pilihan = new MesinModel();
+        String kat = idet.getKategori();
         Long idkat = getIdKategori(kat);
-        mesinList = mesinDb.findAllByidKategori(idkat);
-        
-        model.addAttribute("item", item);
+        List<MesinModel> mesinList = mesinDb.findAllByidKategori(idkat);
+        MesinModel pilihan = new MesinModel();
+        String rolePegawai = auth.getAuthorities().toArray()[0].toString();
+
+        model.addAttribute("role", rolePegawai);
+        model.addAttribute("item", uuid);
         model.addAttribute("tambahan_stok", add_stok);
         model.addAttribute("mesinList", mesinList);
         model.addAttribute("pilmesin", pilihan);
@@ -112,7 +117,7 @@ public class ItemController {
         return "form-update-item";
     }
 
-    @PostMapping(value = "/item/update", params = {"save"})
+    @PostMapping(value = "/item/update")
     public String updateItemSubmit(@ModelAttribute ItemDetail item, 
                                     @ModelAttribute int stok, 
                                     @ModelAttribute MesinModel mesin) {
@@ -139,5 +144,23 @@ public class ItemController {
         pegawai.setCounter(ctr);
         return "update-berhasil";
     }
+
+    @GetMapping(value="request/update/{id}")
+    private String updateItemByRequest(@PathVariable Long id, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        RequestUpdateItemModel rui = ruirs.getRequestById(id);
+        List<MesinModel> mesinList = mesinDb.findAllByidKategori(rui.getIdKategori());
+        MesinModel pilihan = new MesinModel();
+        String rolePegawai = auth.getAuthorities().toArray()[0].toString();
+
+        model.addAttribute("role", rolePegawai);
+        model.addAttribute("item", rui.getIdItem());
+        model.addAttribute("tambahan_stok", rui.getTambahanStok());
+        model.addAttribute("mesinList", mesinList);
+        model.addAttribute("pilmesin", pilihan);
+
+        return "form-update-item";
+    }
+    
 
 }

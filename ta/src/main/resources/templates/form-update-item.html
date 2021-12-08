@@ -13,13 +13,18 @@
 <div class="container">
     <div class="card m-4 p-4">
         <div class="card-body">
-            <div class="justify-content-center">
+            <div th:if="${role == 'ROLE_STAFF_GUDANG'}" class="justify-content-center">
                 <h2>Update Stok Item</h2>
                 <br>
                 <form th:action="@{/item/update}" method="POST">
+                    <input type="hidden" th:field="*{item}" />
                     <label>Tambahan Stok</label>
-                    <input type="text" th:field="*{tambahan_stok}" class="form-control"/>             
-
+                    <div th:if="${tambahan_stok == 0}">
+                        <input type="text" th:field="*{tambahan_stok}" class="form-control"/>   
+                    </div>
+                    <div th:unless="${tambahan_stok == 0}">
+                        <input type="text" th:value="${tambahan_stok}" id="tambahan_stok" name="tambahan_stok" class="form-control" th:readonly="true" />   
+                    </div>
                     <label>Mesin</label>
                     <Select th:field="*{pilmesin}" class="form-control">
                         <option selected value="">--Pilih Mesin--</option>
@@ -33,6 +38,11 @@
                     <button type="submit" name="save" class="btn btn-primary">Submit</button>
                     <a class="btn btn-link" href="/">Home</a>
                 </form>
+            </div>
+
+            <div th:unless="${role == 'ROLE_STAFF_GUDANG'}" class="justify-content-center">
+                <h2>Anda tidak berhak mengakses halaman ini.</h2>
+                <p>Allowed role: STAFF_GUDANG</p>
             </div>
         </div>
     </div>
