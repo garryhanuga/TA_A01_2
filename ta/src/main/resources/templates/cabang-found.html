@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <title>SI-FACTORY : Cabang Found</title>
+    <meta charset="UTF-8">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('')"></nav>
+<div class="card m-4 p-4">
+    <div class="card-header bg-danger">
+        <h3 style="text-align:center; font-weight:bold; color:white">Berhasil terkirim!</h3>
+    </div>
+    <div class="card-body">
+        <div class="justify-content-center">
+            <br>
+            <p th:text="'ID Cabang              : ' + ${cabang.idCabang}" style="font-size:20px"></p>
+<!--            <p th:text="'Nama Cabang            : ' + ${cabang.namaCabang}" style="font-size:20px"></p>-->
+            <p th:text="'Alamat Cabang          : ' + ${cabang.alamatCabang}" style="font-size:20px"></p>
+            <br>
+        </div>
+    </div>
+    <div class="card align-items-center" style="background-color: white;width: 100%; padding: 0px; margin: 0px; border-radius:10px; border-color:transparent">
+        <a class="btn btn-dark" href="/list-delivery">Kembali</a>
+    </div>
+</div>
+</body>
+</html>

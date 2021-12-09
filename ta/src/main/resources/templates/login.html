@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SI-FACTORY : Login</title>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<!-- Main Content -->
+	<div class="container-fluid">
+		<div class="row main-content bg-success text-center">
+			<div class="col-md-4 text-center company__info">
+				
+			</div>
+			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+				<div class="container-fluid">
+					<h2 class="text-center" style="padding-top:20px;">Hello!</h2>
+                    <h6 class="card-title text-center" style="padding:5px;">Silahkan Masuk Terlebih Dahulu!</h6>
+                    <div th:if="${param.eror}">
+                        <span style="color: red">Invalid username or password</span>
+                    </div>
+                    <form th:action="@{/login}" method="POST">
+                        <div class="row form-group">
+                            <label class="col-sm-4 p-0">Username:</label>
+                            <input type="text" class="col-sm-8 form-control input-sm" name="username">
+                        </div>
+                        <div class="row form-group">
+                            <label class="col-sm-4 p-0">Password:</label>
+                            <input type="password" class="col-sm-8 form-control input-sm" name="password">
+                        </div>
+                        <div class="justify-content-center row form-group">
+                            <button type="submit" class="btn btn-primary">Sign In</button>
+           
+                        </div>
+                    </form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	
+</body>
+</html>

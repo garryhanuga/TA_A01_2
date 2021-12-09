@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tambah pegawai</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment"></nav>
+
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Tambah Pegawai Baru</h2>
+                <br>
+                <form th:action="@{/pegawai/add}" th:object="${pegawai}" method="POST" onSubmit="return confirm('Do you want to submit?')">
+                    <label>Username</label>
+                    <input type="text" name="username" class="form-control"/>
+
+                    <label>Nama</label>
+                    <input type="text" name="namaPegawai" class="form-control"/>
+
+                    <label>Tanggal Lahir </label>
+                    <input type="date" name="tanggalLahir" class="form-control"/>
+
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control"/>
+
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control"/>
+
+                    <label>Role</label>
+                    <Select name="role" class="form-control">
+                        <option selected value="">--Pilih Role--</option>
+                        <option th:each="role: ${listRole}"
+                                th:value="${role.idRole}"
+                                th:text="${role.namaRole}" >
+                        </option>
+                    </Select>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-link" href="/">Home</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

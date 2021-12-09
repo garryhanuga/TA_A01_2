@@ -38,7 +38,7 @@ public class PegawaiModel implements Serializable {
 
     @NotNull
     @Size(max=50)
-    @Column(name = "username", nullable = false, unique = true)
+    @Column(name = "username", nullable = false)
     private String username;
 
     @NotNull
@@ -51,18 +51,22 @@ public class PegawaiModel implements Serializable {
     @Column(name="password", nullable = false)
     private String password;
 
+    @NotNull
+    @Column(name="counter", nullable = false)
+    private int counter;
+
     //Relasi dengan Role
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_role", referencedColumnName = "id_role", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private RoleModel role;
 
-   //Relasi dengan Produksi
-   @OneToMany(mappedBy = "pegawai", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-   private List<ProduksiModel> listProduksi;
-//
-//    //Relasi dengan Delivery
-//    @OneToMany(mappedBy = "pegawai", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<DeliveryModel> listDelivery;
+    //Relasi dengan Produksi
+    @OneToMany(mappedBy = "pegawai", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ProduksiModel> listProduksi;
+
+    //Relasi dengan Delivery
+    @OneToMany(mappedBy = "pegawai", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<DeliveryModel> listDelivery;
 
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <title>SI-FACTORY : Item</title>
+    <meta charset="UTF-8">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+
+<nav th:replace="fragments/fragment :: navbar('')"></nav>
+<div class="container">
+    <br>
+    <div class="card-body p-0">
+        <div class="justify-content-center">
+            <div th:if="*{listProduksi.size() != 0}">
+                <h2 class="text-center" style="font-weight:bold; color: #3B3B3B">Daftar Seluruh Produksi</h2>
+                <br>
+                <table class="table">
+                    <thead style="background-color: rgb(255, 91, 91); color:white">
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Mesin</th>
+                        <th>Nama Pegawai</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="produksi, iterationStatus : ${listProduksi}"
+                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${produksi.mesin.namaMesin}"></td>
+                        <td th:text="${produksi.pegawai.namaPegawai}"></td>
+                
+                        <td>
+                            <div class="col p-0">
+                                <a class="btn btn-sm btn-warning" style="border-radius:20; width: 75px; font-weight: bold">Detail</a>
+                            </div>
+
+                        </td>
+                        <td th:if="${role == 'STAFF_GUDANG'}">
+                            <div class="col p-0">
+                                <a class="btn btn-sm btn-warning" style="border-color: grey; border-radius:20; width: 75px; background-color: grey; color: white; font-weight: bold">Update</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:unless="*{listProduksi.size() != 0}">
+                <div class="d-flex flex-column align-items-center">
+                    <h2 class="p-1 text-center" style="color: grey; font-size: 40px; font-weight: bold;" th:text="'Tidak ada Produksi'"></h2>
+                <img class="p-2 img-fluid" alt="Responsive image" th:src="@{/img/emptydata.jpg}" width="50%">
+                </div>
+
+            </div>
+        </div>
+        <div class="card align-items-center" style="background-color: white;width: 100%; padding: 0px; margin: 0px; border-radius:10px; border-color:transparent">
+            <a class="btn btn-dark" href="/">Kembali</a>
+        </div>
+    </div>
+    <br>
+</div>
+</body>
+</html>
