@@ -10,7 +10,11 @@ import org.springframework.stereotype.Service;
 import apap.ta.model.ProduksiModel;
 import apap.ta.repository.ProduksiDb;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
+
 public class ProduksiServiceImpl implements ProduksiService {
     @Autowired
     ProduksiDb produksiDb;

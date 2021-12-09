@@ -9,11 +9,14 @@ import apap.ta.rest.Setting;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
+
 public class DeliveryRestServiceImpl implements DeliveryRestService{
     private final WebClient webClient;
 
