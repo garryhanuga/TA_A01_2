@@ -31,6 +31,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="request, iterationStatus : ${listUpdate}"
+                        th:if="${role == 'STAFF_GUDANG' || role == 'STAFF_OPERASIONAL'} "
                         th:style="${iterationStatus.even} ? 'font-weight:bold;'">
                         <td th:text="${iterationStatus.count}"></td>
                         <td th:text="${request.idItem}"></td>
@@ -39,7 +40,11 @@
                         <td th:text="${request.tambahanStok}"></td>
                         <td th:text="${request.tanggalRequest}"></td>
                         <td th:if="${request.executed == true && role == 'STAFF_OPERASIONAL'}">
-                            <a class="btn btn-sm btn-primary" th:href="@{/delivery/add/} + ${request.idRequestUpdateItem} + '/' + ${request.idCabang} ">Buat Delivery</a>
+                            <a th:if = "${request.delivery == null}" class="btn btn-sm btn-primary"
+                               th:href="@{/delivery/add/} + ${request.idRequestUpdateItem} + '/' + ${request.idCabang} ">Buat Delivery</a>
+                            <p th:if="${request.delivery != null}"> Delivery Sudah Dibuat </p>
+                        </td>
+                        <td th:if="${request.executed == true && role == 'STAFF_GUDANG'}"> Perlu Buat Delivery</a>
                         </td>
                         <td th:if="${request.executed == false}">
                             <a class="btn btn-sm btn-primary" th:href="@{/request/update/} + ${request.idRequestUpdateItem}">Update</a>
