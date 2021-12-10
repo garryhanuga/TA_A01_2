@@ -24,6 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/api/v2/**").permitAll()
                 .antMatchers("/api/v1/**").permitAll()
+                .antMatchers("/pegawai/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/pegawai/**").hasAnyAuthority("FACTORY_MANAGER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
