@@ -29,7 +29,7 @@ public class RequestUpdateItemRestController {
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field"
             );
         } else {
-            return requestUpdateItemRestService.createRequestUpdateItem(requestUpdateItem);
+            return requestUpdateItemRestService.updateCabangStok(requestUpdateItem);
         }
     }
 
