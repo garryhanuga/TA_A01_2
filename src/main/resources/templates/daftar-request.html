@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SI-FACTORY : request</title>
+    <meta charset="UTF-8">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+
+<nav th:replace="fragments/fragment :: navbar('')"></nav>
+<div class="container">
+    <div class="card-body">
+        <div class="justify-content-center">
+            <div th:if="*{listUpdate.size() != 0}">
+                <h2 class="text-center" style="font-weight:bold; color:#3B3B3B">Daftar Seluruh Request Update Item</h2>
+                <br>
+                <table class="table">
+                    <thead style="background-color: rgb(255, 91, 91); color:white">
+                    <tr>
+                        <th>No</th>
+                        <th>ID Item</th>
+                        <th>ID Kategori</th>
+                        <th>Cabang</th>
+                        <th>Tambahan Stok</th>
+                        <th>Tanggal</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="request, iterationStatus : ${listUpdate}"
+                        th:if="${role == 'STAFF_GUDANG' || role == 'STAFF_OPERASIONAL'} "
+                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${request.idItem}"></td>
+                        <td th:text="${request.idKategori}"></td>
+                        <td th:text="${request.idCabang}"></td>
+                        <td th:text="${request.tambahanStok}"></td>
+                        <td th:text="${request.tanggalRequest}"></td>
+                        <td th:if="${request.executed == true && role == 'STAFF_OPERASIONAL'}">
+                            <a th:if = "${request.delivery == null}" class="btn btn-sm btn-primary"
+                               th:href="@{/delivery/add/} + ${request.idRequestUpdateItem} + '/' + ${request.idCabang} ">Buat Delivery</a>
+                            <p th:if="${request.delivery != null}"> Delivery Sudah Dibuat </p>
+                        </td>
+                        <td th:if="${request.executed == true && role == 'STAFF_GUDANG'}"> Perlu Buat Delivery</a>
+                        </td>
+                        <td th:if="${request.executed == false}">
+                            <a class="btn btn-sm btn-primary" th:href="@{/request/update/} + ${request.idRequestUpdateItem}">Update</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:unless="*{listUpdate.size() != 0}">
+                <h2 th:text="'Belum Ada Request Update request'"></h2>
+            </div>
+        </div>
+        <div class="card align-items-center" style="background-color: white;width: 100%; padding: 0px; margin: 0px; border-radius:10px; border-color:transparent">
+            <a class="btn btn-dark" href="/">Kembali</a>
+        </div>
+    </div>
+    <br>
+</div>
+</body>
+</html>

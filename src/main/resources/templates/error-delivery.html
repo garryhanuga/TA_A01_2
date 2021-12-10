@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Request tidak sesuai</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('')"></nav>
+<h3 style="text-align:center" th:text="'Mohon maaf, id request ' + ${id} + ' telah membuat delivery '"></h3>
+</body>
+</html>
