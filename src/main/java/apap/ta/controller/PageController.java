@@ -20,14 +20,12 @@ public class PageController {
     public String home(
             Model model
     ){
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        PegawaiModel pegawai = pegawaiService.getPegawai(auth.getName());
-//        model.addAttribute("role", pegawai.getRole().getNamaRole());
-        model.addAttribute("role", "ini");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        PegawaiModel pegawai = pegawaiService.getPegawai(auth.getName());
+        model.addAttribute("role", pegawai.getRole().getNamaRole());
 
 // //        System.out.println(pegawai.getRole().getNamaRole());
-//        model.addAttribute("namaPegawai", pegawai.getNamaPegawai());
-        model.addAttribute("namaPegawai", "itu");
+        model.addAttribute("namaPegawai", pegawai.getNamaPegawai());
 
         return "home";
     }
