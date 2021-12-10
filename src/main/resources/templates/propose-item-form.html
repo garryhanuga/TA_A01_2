@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Propose item</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment"></nav>
+
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Propose Item baru</h2>
+                <br>
+                <form th:action="@{/item/propose}" th:object="${item}" method="POST" onSubmit="return confirm('Do you want to submit?')">
+                    <label>Nama Item</label>
+                    <input type="text" name="nama" class="form-control"/>
+
+                    <label>Harga Item</label>
+                    <input type="number" name="harga" class="form-control"/>
+
+                    <label>Stok Item</label>
+                    <input type="number" name="stok" class="form-control"/>
+
+                    <label>Kategroi</label>
+                    <Select name="kategori" class="form-control">
+                        <option selected value="">--Pilih Kategori--</option>
+                        <option th:each="mesin: ${listMesin}"
+                                th:value="${mesin.idMesin}"
+                                th:text="${mesin.namaMesin}" >
+                        </option>
+                    </Select>
+
+                    <label>Cluster Item</label>
+                    <input type="text" name="cluster" class="form-control" value="A01" readonly/>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a class="btn btn-link" href="/">Home</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

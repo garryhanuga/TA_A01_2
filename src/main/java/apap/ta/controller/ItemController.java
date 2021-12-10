@@ -129,6 +129,30 @@ public class ItemController {
         return "form-update-item";
     }
 
+    @GetMapping(value = "/item/propose")
+    private String proposeItem(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<MesinModel> listMesin = mesinService.retrieveListMesin();
+        // String rolePegawai = auth.getAuthorities().toArray()[0].toString();
+        model.addAttribute("listMesin", listMesin);
+        return "propose-item-form";
+    }
+
+    @PostMapping(value ="item/propose/{nama}/{harga}/{stok}/{kategori}/{cluster}") 
+        private String proposeItemSubmit(Model model, @PathVariable String nama, @PathVariable int harga, @PathVariable int stok, @PathVariable Long kategori, @PathVariable String cluster){
+            ItemDetail itemDetail= itemRestService.proposeItem(nama,harga,stok,kategori);
+            if (itemDetail.getStatus()!=200){
+                return "gagal-propose";
+            }
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            PegawaiModel pegawai = pegawaiService.getPegawai(auth.getName());
+            pegawaiService.addCounter(pegawai);
+            String rolePegawai = auth.getAuthorities().toArray()[0].toString();
+            model.addAttribute("role", rolePegawai);
+            return "add-propose-item";
+        }
+    
+
     @PostMapping(value = "/item/update")
     public String updateItemSubmit(String item, Integer tambahan_stok, Long pilmesin, Model model) {
         ItemDetail idet = itemRestService.getItem(item);

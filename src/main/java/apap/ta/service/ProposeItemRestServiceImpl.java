@@ -20,36 +20,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 @Transactional
-public class ItemRestServiceImpl implements ItemRestService{
+public class ProposeItemRestServiceImpl implements ProposeItemRestService{
     private final WebClient webClient;
 
-    public ItemRestServiceImpl(WebClient.Builder webClientBuilder){
-        this.webClient = webClientBuilder.baseUrl(Setting.itemUrl).build();
-    }
-
-    @Override
-    public Mono<ListItemDetail> getListItem() {
-        return this.webClient.get()
-                .retrieve()
-                .bodyToMono(ListItemDetail.class);
-    }
-
-    @Override
-    public ItemDetail getItem(String uuid) {
-        ItemDetail obj =  this.webClient.get().uri("/" + uuid)
-                .retrieve()
-                .bodyToMono(ItemDetail.class)
-                .block();
-        return obj;
-    }
-
-    @Override
-    public ItemDetail updateItem(ItemDetail item) {
-        ItemDetail obj = this.webClient.put().uri("/" + item.getUuid())
-            .contentType(MediaType.APPLICATION_JSON)
-            .bodyValue(item)
-            .retrieve().bodyToMono(ItemDetail.class).block();
-            return obj;
+    public ProposeItemRestServiceImpl(WebClient.Builder webClientBuilder){
+        this.webClient = webClientBuilder.baseUrl(Setting.proposeItemUrl).build();
     }
 
     @Override
