@@ -8,6 +8,7 @@ import apap.ta.model.RequestUpdateItemModel;
 import apap.ta.rest.ItemDetail;
 import apap.ta.rest.ListItemDetail;
 import apap.ta.service.ItemRestService;
+import apap.ta.service.ProposeItemRestService;
 import apap.ta.service.MesinRestService;
 import apap.ta.service.PegawaiServiceImpl;
 import apap.ta.service.ProduksiService;
@@ -56,6 +57,9 @@ public class ItemController {
 
     @Autowired
     private ProduksiService produksiService;
+
+    @Autowired
+    private ProposeItemRestService proposeItemRestService;
 
     @GetMapping("/list-item")
     private String getListItem(Model model) {
@@ -140,7 +144,7 @@ public class ItemController {
 
     @PostMapping(value ="item/propose/{nama}/{harga}/{stok}/{kategori}/{cluster}") 
         private String proposeItemSubmit(Model model, @PathVariable String nama, @PathVariable int harga, @PathVariable int stok, @PathVariable Long kategori, @PathVariable String cluster){
-            ItemDetail itemDetail= itemRestService.proposeItem(nama,harga,stok,kategori);
+            ItemDetail itemDetail= proposeItemRestService.proposeItem(nama,harga,stok,kategori);
             if (itemDetail.getStatus()!=200){
                 return "gagal-propose";
             }
