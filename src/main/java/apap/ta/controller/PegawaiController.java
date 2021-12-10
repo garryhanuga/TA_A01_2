@@ -41,10 +41,10 @@ public class PegawaiController {
 
     @GetMapping(value = "/add")
     private String addPegawaiFormPage(Model model) {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        PegawaiModel peg = pegawaiService.getPegawai(auth.getName());
-//        model.addAttribute("role", peg.getRole().getNamaRole());
-//        System.out.println(peg.getRole().getNamaRole());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        PegawaiModel peg = pegawaiService.getPegawai(auth.getName());
+        model.addAttribute("role", peg.getRole().getNamaRole());
+        System.out.println(peg.getRole().getNamaRole());
         PegawaiModel pegawai = new PegawaiModel();
         List<RoleModel> listRole = roleService.findAll();
         model.addAttribute("pegawai", pegawai);
@@ -54,9 +54,9 @@ public class PegawaiController {
 
     @PostMapping(value = "/add")
     private String addPegawaiSubmit(@ModelAttribute PegawaiModel pegawai, Model model) {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        PegawaiModel peg = pegawaiService.getPegawai(auth.getName());
-//        model.addAttribute("role", peg.getRole().getNamaRole());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        PegawaiModel peg = pegawaiService.getPegawai(auth.getName());
+        model.addAttribute("role", peg.getRole().getNamaRole());
         model.addAttribute("listRole", roleService.findAll());
 //        model.addAttribute("namaPegawai", peg.getNamaPegawai());
         model.addAttribute("username", pegawai.getUsername());
