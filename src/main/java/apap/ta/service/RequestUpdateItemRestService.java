@@ -14,5 +14,4 @@ public interface RequestUpdateItemRestService {
     RequestUpdateItemModel updateRequestUpdateItem(RequestUpdateItemModel requestUpdateItem);
     Mono<RequestUpdateItemDetail> updateCabangStok(RequestUpdateItemDetail detailItem) ;
 
-
 }
