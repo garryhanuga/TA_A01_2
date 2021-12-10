@@ -30,20 +30,14 @@ public class DeliveryRestController {
     @Autowired
     RestTemplate restTemplate;
 
-//    @GetMapping(value = "/list-cabang")
-//    private Mono<String> retrieveCabang(){
-//        return deliveryRestService.getListCabang();
-//    }
-
     @GetMapping("/daftar-alamat-cabang/{idDelivery}/{idCabang}")
     private String getCabang(
             @PathVariable Long idDelivery,
             @PathVariable Long idCabang,
             Model model){
         DeliveryModel delivery = deliveryRestService.getIdDelivery(idDelivery);
-        PegawaiModel pegawai = delivery.getPegawai();
-        int counter = delivery.getPegawai().getCounter();
-        String cabangUrl = Setting.cabangUrl + idCabang;
+        PegawaiModel kurir = delivery.getPegawai();
+        String cabangUrl = Setting.cabangUrl;
         List listCabangRest = restTemplate.getForObject(cabangUrl, List.class);
         List<DeliveryDetail> cabangDelivery = new ArrayList<>();
 
@@ -64,11 +58,9 @@ public class DeliveryRestController {
 
         for(DeliveryDetail cabang: cabangDelivery){
             if(cabang.getIdCabang().equals(idCabang)){
-                counter+=1;
                 delivery.setSent(true);
-                delivery.getPegawai().setCounter(counter);
                 deliveryRestService.updateDelivery(delivery);
-                pegawaiService.updatePegawai(pegawai);
+                pegawaiService.addCounter(kurir);
                 model.addAttribute("cabang", cabang);
                 model.addAttribute("delivery", delivery);
                 return "cabang-found";

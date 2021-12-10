@@ -4,8 +4,13 @@ import apap.ta.model.RequestUpdateItemModel;
 import apap.ta.repository.RequestUpdateItemDb;
 import apap.ta.rest.RequestUpdateItemDetail;
 import apap.ta.rest.Setting;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.firewall.RequestRejectedException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
 import java.sql.Date;
 
@@ -60,6 +65,21 @@ public class RequestUpdateItemRestServiceImpl implements RequestUpdateItemRestSe
 
     public RequestUpdateItemRestServiceImpl(WebClient.Builder webClientBuilder){
         this.webClient = webClientBuilder.baseUrl(Setting.requestUpdateItemUrl).build();
+    }
+
+    @Override
+    public Mono<RequestUpdateItemDetail> updateCabangStok(RequestUpdateItemDetail detailItem) {
+        MultiValueMap<String, Object> data = new LinkedMultiValueMap<>();
+        data.add("idItem", detailItem.getIdItem());
+        data.add("idKategori,", detailItem.getIdKategori());
+        data.add("tambahanStok", detailItem.getTambahanStok());
+        data.add("idCabang,", detailItem.getIdCabang());
+
+        return this.webClient.post()
+                .syncBody(data)
+                .retrieve()
+                .bodyToMono(RequestUpdateItemDetail.class);
+
     }
 
 }
