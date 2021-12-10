@@ -62,8 +62,6 @@ public class DeliveryController {
         PegawaiModel staff_op = pegawaiService.getPegawai(auth.getName());
         RequestUpdateItemModel requestUpdateItem = requestUpdateItemRestService.getRequestItemModelByIdRequestItemModel(idRequestUpdateItem);
         PegawaiModel kurir = pegawaiService.getPegawai(delivery.getPegawai().getUsername());
-        int counter = staff_op.getCounter();
-        counter+=1;
         delivery.setRequestUpdateItem(requestUpdateItem);
         delivery.setIdCabang(idCabang);
         java.util.Date date = new java.util.Date();
@@ -71,8 +69,7 @@ public class DeliveryController {
         delivery.setTanggalDibuat(tgl_sekarang);
         delivery.setTanggalDikirim(tgl_sekarang);
         // set tanggal dikirim sementara tgl skrg dulu
-        staff_op.setCounter(counter);
-        pegawaiService.updatePegawai(staff_op);
+        pegawaiService.addCounter(staff_op);
         delivery.setPegawai(kurir);
         delivery.setSent(false);
         deliveryRestService.addDelivery(delivery);
