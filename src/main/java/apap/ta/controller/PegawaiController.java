@@ -41,10 +41,10 @@ public class PegawaiController {
 
     @GetMapping(value = "/add")
     private String addPegawaiFormPage(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        PegawaiModel peg = pegawaiService.getPegawai(auth.getName());
-        model.addAttribute("role", peg.getRole().getNamaRole());
-        System.out.println(peg.getRole().getNamaRole());
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        PegawaiModel peg = pegawaiService.getPegawai(auth.getName());
+//        model.addAttribute("role", peg.getRole().getNamaRole());
+//        System.out.println(peg.getRole().getNamaRole());
         PegawaiModel pegawai = new PegawaiModel();
         List<RoleModel> listRole = roleService.findAll();
         model.addAttribute("pegawai", pegawai);
