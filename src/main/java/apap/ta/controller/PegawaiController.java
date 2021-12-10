@@ -54,11 +54,11 @@ public class PegawaiController {
 
     @PostMapping(value = "/add")
     private String addPegawaiSubmit(@ModelAttribute PegawaiModel pegawai, Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        PegawaiModel peg = pegawaiService.getPegawai(auth.getName());
-        model.addAttribute("role", peg.getRole().getNamaRole());
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        PegawaiModel peg = pegawaiService.getPegawai(auth.getName());
+//        model.addAttribute("role", peg.getRole().getNamaRole());
         model.addAttribute("listRole", roleService.findAll());
-        model.addAttribute("namaPegawai", peg.getNamaPegawai());
+//        model.addAttribute("namaPegawai", peg.getNamaPegawai());
         model.addAttribute("username", pegawai.getUsername());
         List<PegawaiModel> listPegawai = pegawaiService.getPegawaiList();
         for(int i =0 ; i<listPegawai.size(); i++){
