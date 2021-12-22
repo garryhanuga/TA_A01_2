@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>SI-FACTORY : Error</title>
+    <meta charset="UTF-8">
+    <title> Error </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('')"></nav>
+<div class="d-flex justify-content-center">
+    <div class="m-4">
+        <h2>Terjadi error pada server</h2>
+        <p>Error code: 500</p>
+    </div>
+    <div class="card align-items-center" style="background-color: white;width: 100%; padding: 0px; margin: 0px; border-radius:10px; border-color:transparent">
+        <a class="btn btn-dark" href="/">Kembali</a>
+    </div>
+
+</div>
+
+
+</body>
+
+</html>
