@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Tambah pegawai</title>
+    <title>Update Stok Item</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
@@ -17,6 +17,7 @@
                 <h2>Update Stok Item</h2>
                 <br>
                 <form th:action="@{/item/update}" method="POST">
+                    <input type="hidden" name="ruid" id="ruid" th:value="${rui}" />
                     <input type="hidden" name="item" id="item" th:value="${item}" />
                     <label>Tambahan Stok</label>
                     <div th:if="${tambahan_stok == 0}">
