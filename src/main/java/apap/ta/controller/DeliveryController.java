@@ -46,6 +46,9 @@ public class DeliveryController {
                 listKurir.add(pegawai);
             }
         }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        PegawaiModel pegawai = pegawaiService.getPegawai(auth.getName());
+        model.addAttribute("role", pegawai.getRole().getNamaRole());
         model.addAttribute("listKurir", listKurir);
         model.addAttribute("delivery", delivery);
         return "form-pilih-kurir";
