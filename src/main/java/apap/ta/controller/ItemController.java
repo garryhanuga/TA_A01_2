@@ -14,6 +14,7 @@ import apap.ta.service.PegawaiServiceImpl;
 import apap.ta.service.ProduksiService;
 import apap.ta.service.RequestUpdateItemRestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -121,7 +122,7 @@ public class ItemController {
         List<MesinModel> mesinList = mesinService.retrieveListMesinByKategori(idkat);
         MesinModel pilihan = new MesinModel();
         String rolePegawai = auth.getAuthorities().toArray()[0].toString();
-
+        model.addAttribute("ruid", null);
         model.addAttribute("role", rolePegawai);
         model.addAttribute("item", uuid);
         model.addAttribute("tambahan_stok", add_stok);
@@ -155,35 +156,41 @@ public class ItemController {
         }
     
 
-    @PostMapping(value = "/item/update")
-    public String updateItemSubmit(String item, Integer tambahan_stok, Long pilmesin, Model model) {
-        ItemDetail idet = itemRestService.getItem(item);
-        MesinModel mesin = mesinService.getMesinById(pilmesin);
-        int total_stok = idet.getStok() + tambahan_stok;
-        idet.setStok(total_stok);
-        ItemDetail updated = itemRestService.updateItem(idet);
-            ProduksiModel prod = new ProduksiModel();
-            Long idkat = getIdKategori(idet.getKategori());
-            Date dt = new Date();
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            PegawaiModel pegawai = pegawaiService.getPegawai(auth.getName());
-            prod.setIdItem(updated.getUuid());
-            prod.setIdKategori(idkat);
-            prod.setMesin(mesin);
-            prod.setPegawai(pegawai);
-            prod.setTambahanStok(tambahan_stok);
-            prod.setTanggalProduksi(dt);
-            produksiService.createProduksi(prod);
-
-            mesinService.updateMesin(mesin);
-
-            pegawaiService.addCounter(pegawai);
-
-            model.addAttribute("nmitem", updated.getNama());
-            model.addAttribute("stok", tambahan_stok);
-            model.addAttribute("nmmesin", mesin.getNamaMesin());
-            return "update-berhasil";
-    }
+        @PostMapping(value = "/item/update")		
+        public String updateItemSubmit(@Nullable Long ruid, String item, Integer tambahan_stok, Long pilmesin, Model model) {
+            RequestUpdateItemModel rui = null;
+            if (ruid != null) {
+                rui = ruirs.getRequestById(ruid);
+                rui.setExecuted(true);
+            }
+            ItemDetail idet = itemRestService.getItem(item);
+            MesinModel mesin = mesinService.getMesinById(pilmesin);
+            int total_stok = idet.getStok() + tambahan_stok;
+            idet.setStok(total_stok);
+            ItemDetail updated = itemRestService.updateItem(idet);
+                ProduksiModel prod = new ProduksiModel();
+                Long idkat = getIdKategori(idet.getKategori());
+                Date dt = new Date();
+                Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+                PegawaiModel pegawai = pegawaiService.getPegawai(auth.getName());
+                prod.setIdItem(updated.getUuid());
+                prod.setIdKategori(idkat);
+                prod.setMesin(mesin);
+                prod.setPegawai(pegawai);
+                prod.setTambahanStok(tambahan_stok);
+                prod.setTanggalProduksi(dt);
+                prod.setRequestUpdateItem(rui);
+                produksiService.createProduksi(prod);
+    
+                mesinService.updateMesin(mesin);
+    
+                pegawaiService.addCounter(pegawai);
+    
+                model.addAttribute("nmitem", updated.getNama());
+                model.addAttribute("stok", tambahan_stok);
+                model.addAttribute("nmmesin", mesin.getNamaMesin());
+                return "update-berhasil";
+        }
 
     @GetMapping(value="request/update/{id}")
     private String updateItemByRequest(@PathVariable Long id, Model model) {
@@ -192,7 +199,7 @@ public class ItemController {
         List<MesinModel> mesinList = mesinService.retrieveListMesinByKategori(rui.getIdKategori());
         MesinModel pilihan = new MesinModel();
         String rolePegawai = auth.getAuthorities().toArray()[0].toString();
-
+        model.addAttribute("rui", id);
         model.addAttribute("role", rolePegawai);
         model.addAttribute("item", rui.getIdItem());
         model.addAttribute("tambahan_stok", rui.getTambahanStok());

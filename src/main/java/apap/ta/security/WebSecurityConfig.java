@@ -23,9 +23,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/api/v2/**").permitAll()
-                .antMatchers("/api/v1/**").permitAll()
                 .antMatchers("/pegawai/list-pegawai").hasAnyAuthority("ADMIN", "FACTORY_MANAGER")
                 .antMatchers("/pegawai/add").hasAnyAuthority("ADMIN")
+                .antMatchers("/item/propose/**").hasAnyAuthority("FACTORY_MANAGER")
+                .antMatchers("/item/propose").hasAnyAuthority("FACTORY_MANAGER")
+                .antMatchers("/list-request-update-item").hasAnyAuthority("STAFF_OPERASIONAL", "STAFF_GUDANG")
+                .antMatchers("/delivery/add/**").hasAnyAuthority("STAFF_OPERASIONAL")
+                .antMatchers("/list-delivery").hasAnyAuthority("STAFF_OPERASIONAL", "STAFF_KURIR")
+                .antMatchers("/item/update/**").hasAnyAuthority("STAFF_GUDANG")
+                .antMatchers("/api/v1/daftar-alamat-cabang/**").hasAnyAuthority("STAFF_KURIR")
+                .antMatchers("/request/update/**").hasAnyAuthority("STAFF_GUDANG")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
@@ -35,7 +42,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable();
     }
-
     @Bean
     public BCryptPasswordEncoder encoder(){
      return new BCryptPasswordEncoder();
