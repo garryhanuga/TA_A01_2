@@ -18,7 +18,7 @@
 <!--        <input type="hidden" th:field="*{RequestUpdateItem}" />-->
         <div class="justify-content-center">
             <label>Daftar Kurir</label>
-            <Select name="pegawai" class="form-control">
+            <Select name="pegawai" class="form-control" style="width:20%">
                 <option selected value="">Pilih Kurir</option>
                 <option th:each="kurir: ${listKurir}"
                         th:value="${kurir.idPegawai}"
@@ -27,7 +27,7 @@
             </Select>
         </div>
     </div>
-    <button class="btn btn-primary" type="submit" name="submit" >Submit</button>
+    <button class="btn btn-primary" type="submit" name="submit" style="width: 25%">Submit</button>
     </form>
 </div>
 </body>
