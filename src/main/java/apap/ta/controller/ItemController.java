@@ -116,12 +116,14 @@ public class ItemController {
     private String updateItem(@PathVariable String uuid, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         ItemDetail idet = itemRestService.getItem(uuid);
+        String nama = idet.getNama();
         int add_stok = 0;
         String kat = idet.getKategori();
         Long idkat = getIdKategori(kat);
         List<MesinModel> mesinList = mesinService.retrieveListMesinByKategori(idkat);
         MesinModel pilihan = new MesinModel();
         String rolePegawai = auth.getAuthorities().toArray()[0].toString();
+        model.addAttribute("nama", nama);
         model.addAttribute("ruid", null);
         model.addAttribute("role", rolePegawai);
         model.addAttribute("item", uuid);
@@ -199,6 +201,8 @@ public class ItemController {
         List<MesinModel> mesinList = mesinService.retrieveListMesinByKategori(rui.getIdKategori());
         MesinModel pilihan = new MesinModel();
         String rolePegawai = auth.getAuthorities().toArray()[0].toString();
+        String nama = itemRestService.getItem(rui.getIdItem()).getNama();
+        model.addAttribute("nama", nama);
         model.addAttribute("rui", id);
         model.addAttribute("role", rolePegawai);
         model.addAttribute("item", rui.getIdItem());

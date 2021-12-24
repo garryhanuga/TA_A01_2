@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <script>
+        function validateForm() {
+            var ts = document.forms["updateItem"]["tambahan_stok"].value;
+            var pm = document.forms["updateItem"]["pilmesin"].value;
+            if (ts == 0) {
+                alert("Jumlah barang harus lebih dari 0");
+                return false;
+            }
+            if (pm === '') {
+                alert("Pilih mesin untuk memproduksi item");
+                return false;
+            }
+        }
+    </script>
     <title>Update Stok Item</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+
+    
 </head>
 <body>
 <nav th:replace="fragments/fragment"></nav>
@@ -13,10 +29,9 @@
 <div class="container">
     <div class="card m-4 p-4">
         <div class="card-body">
-            <div th:if="${role == 'STAFF_GUDANG'}" class="justify-content-center">
-                <h2>Update Stok Item</h2>
+                <h2 th:text="'Update Stok ' + ${nama}"></h2>
                 <br>
-                <form th:action="@{/item/update}" method="POST">
+                <form name="updateItem" th:action="@{/item/update}" onSubmit="return validateForm()" method="POST">
                     <input type="hidden" name="ruid" id="ruid" th:value="${rui}" />
                     <input type="hidden" name="item" id="item" th:value="${item}" />
                     <label>Tambahan Stok</label>
@@ -36,16 +51,12 @@
                     </Select>
                     <br>
                     <br>
-                    <button type="submit" name="save" class="btn btn-primary">Submit</button>
-                    <a class="btn btn-link" href="/">Home</a>
+                    <button type="submit" name="save" style="width: 25%;" class="btn btn-primary">Submit</button>
                 </form>
-            </div>
-
-            <div th:unless="${role == 'STAFF_GUDANG'}" class="justify-content-center">
-                <h2>Anda tidak berhak mengakses halaman ini.</h2>
-                <p>Allowed role: STAFF_GUDANG</p>
-            </div>
         </div>
+    </div>
+    <div class="card" style="background-color: white;width: 30%; padding: 0px; margin: 0px; border-radius:10px; border-color:transparent">
+        <a class="btn btn-dark" href="/list-item">Kembali</a>
     </div>
 </div>
 
