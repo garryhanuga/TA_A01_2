@@ -29,9 +29,9 @@
                     <label>Kategroi</label>
                     <Select name="kategori" class="form-control">
                         <option selected value="">--Pilih Kategori--</option>
-                        <option th:each="mesin: ${listMesin}"
-                                th:value="${mesin.idMesin}"
-                                th:text="${mesin.namaMesin}" >
+                        <option th:each="kategori: ${listKategori}"
+                                th:value="${kategori}"
+                                th:text="${kategori}" >
                         </option>
                     </Select>
 

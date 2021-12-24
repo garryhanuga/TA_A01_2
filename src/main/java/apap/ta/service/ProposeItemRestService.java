@@ -6,7 +6,7 @@ import apap.ta.rest.ItemDetail;
 import apap.ta.rest.ListItemDetail;
 import reactor.core.publisher.Mono;
 public interface ProposeItemRestService {
-    ItemDetail proposeItem(String nama, int harga, int stok, Long kategori);
+    void proposeItem(String nama, int harga, int stok, Long kategori, String cluster);
 }
 
 

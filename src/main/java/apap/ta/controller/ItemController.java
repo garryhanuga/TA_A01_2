@@ -133,22 +133,27 @@ public class ItemController {
 
         return "form-update-item";
     }
-
     @GetMapping(value = "/item/propose")
     private String proposeItem(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<Long> listKategori = new ArrayList<Long> ();
         List<MesinModel> listMesin = mesinService.retrieveListMesin();
+        for (MesinModel m : listMesin){ 
+            if(!listKategori.contains(m.getIdKategori())){
+            listKategori.add(m.getIdKategori());}
+        }
         // String rolePegawai = auth.getAuthorities().toArray()[0].toString();
-        model.addAttribute("listMesin", listMesin);
+        model.addAttribute("listKategori", listKategori);
         return "propose-item-form";
     }
 
-    @PostMapping(value ="item/propose/{nama}/{harga}/{stok}/{kategori}/{cluster}") 
-        private String proposeItemSubmit(Model model, @PathVariable String nama, @PathVariable int harga, @PathVariable int stok, @PathVariable Long kategori, @PathVariable String cluster){
-            ItemDetail itemDetail= proposeItemRestService.proposeItem(nama,harga,stok,kategori);
-            if (itemDetail.getStatus()!=200){
-                return "gagal-propose";
-            }
+    @PostMapping(value ="item/propose") 
+        private String proposeItemSubmit(Model model, @RequestParam String nama, @RequestParam int harga, @RequestParam int stok, @RequestParam Long kategori, @RequestParam String cluster){
+            System.out.println("masuk sini");
+            proposeItemRestService.proposeItem(nama,harga,stok,kategori,cluster);
+            // if (itemDetail.getStatus()!=200){
+            //     return "gagal-propose";
+            // }
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             PegawaiModel pegawai = pegawaiService.getPegawai(auth.getName());
             pegawaiService.addCounter(pegawai);
