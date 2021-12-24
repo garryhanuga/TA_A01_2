@@ -46,8 +46,11 @@
                         </td>
                         <td th:if="${request.executed == true && role == 'STAFF_GUDANG'}"> Perlu Buat Delivery</a>
                         </td>
-                        <td th:if="${request.executed == false}">
+                        <td th:if="${request.executed == false && role == 'STAFF_GUDANG'}">
                             <a class="btn btn-sm btn-primary" th:href="@{/request/update/} + ${request.idRequestUpdateItem}">Update</a>
+                        </td>
+                        <td th:if="${request.executed == false && role == 'STAFF_OPERASIONAL'}">
+                            <p>Belum di-update</p>
                         </td>
                     </tr>
                     </tbody>
