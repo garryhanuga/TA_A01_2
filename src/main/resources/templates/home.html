@@ -29,6 +29,10 @@
                 <a th:if="${role == 'STAFF_GUDANG' || role == 'STAFF_OPERASIONAL'}"th:href="@{/list-request-update-item}" class="mx-2 btn btn-dark">Daftar Request Update Item</a>
 <!--                <a th:href="@{/list-item}" class="mx-2 btn btn-outline-dark">Daftar Request Update Item</a>-->
             </div>
+            <div class="d-flex">
+                <a th:if="${role == 'FACTORY_MANAGER'}"th:href="@{/item/propose}" class="mx-2 btn btn-dark">Propose Item</a>
+<!--                <a th:href="@{/list-item}" class="mx-2 btn btn-outline-dark">Daftar Request Update Item</a>-->
+            </div>
     <!--        <div class="my-3 d-flex justify-content-center">-->
     <!--            <a th:href="@{/user/viewall}" class="mx-2 btn btn-dark">Lihat semua user</a>-->
     <!--        </div>-->
